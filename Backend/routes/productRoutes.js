@@ -1,6 +1,7 @@
 // routes/productRoutes.js
 const express = require('express');
 const { createProduct, getProducts, getProductById, updateProduct, deleteProduct } = require('../controllers/productController');
+const Product = require('../models/Product');
 //const authMiddleware = require('../middleware/authMiddleware'); // Asegurarse de que solo usuarios autenticados accedan
 
 const router = express.Router();

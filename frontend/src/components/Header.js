@@ -1,9 +1,22 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 function Header() {
   const navigate = useNavigate();
-  const isAuthenticated = !!localStorage.getItem('token'); // Verificar si hay un token
+  const token = localStorage.getItem('token'); // Obtener el token del almacenamiento local
+  const isAuthenticated = !!token;
+
+  // Decodificar el token para obtener el rol del usuario
+  let userRole = null;
+  if (token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      userRole = decodedToken.role; // Asumimos que el token tiene un campo "role"
+    } catch (error) {
+      console.error("Error al decodificar el token", error);
+    }
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('token'); // Eliminar el token
@@ -21,6 +34,12 @@ function Header() {
           <ul className="navbar-nav ml-auto">
             {isAuthenticated ? (
               <>
+                {/* Mostrar el enlace "Agregar Producto" solo si el usuario es administrador */}
+                {userRole === 'admin' && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/add-product">Agregar Producto</Link>
+                  </li>
+                )}
                 <li className="nav-item">
                   <button className="btn btn-link nav-link" onClick={handleLogout}>Cerrar Sesión</button>
                 </li>
