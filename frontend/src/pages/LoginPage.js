@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Inicializar useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,8 +15,11 @@ function LoginPage() {
         email,
         password,
       });
-      const token = response.data.token;
-      localStorage.setItem('token', token); // Guardamos el token en localStorage
+      
+      // Guardamos el token y el rol en localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('role', response.data.role);
+
       setMessage('Inicio de sesión exitoso');
       
       // Redirigir a la página de inicio o a otra página
@@ -33,11 +36,21 @@ function LoginPage() {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Email</label>
-          <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="form-group">
           <label>Contraseña</label>
-          <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <button type="submit" className="btn btn-primary">Ingresar</button>
       </form>

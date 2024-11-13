@@ -1,26 +1,21 @@
-// routes/productRoutes.js
 const express = require('express');
-const { createProduct, getProducts, getProductById, updateProduct, deleteProduct } = require('../controllers/productController');
-const Product = require('../models/Product');
-//const authMiddleware = require('../middleware/authMiddleware'); // Asegurarse de que solo usuarios autenticados accedan
-
 const router = express.Router();
-
-// Ruta para crear un producto (requiere autenticación de administrador)
-//router.post('/', authMiddleware, createProduct);
-router.post('/', createProduct);
+const productController = require('../controllers/productController');
+const { upload } = require('../controllers/productController'); // Asegúrate de que el controlador exporte 'upload'
 
 // Ruta para obtener todos los productos
-router.get('/', getProducts);
+router.get('/', productController.getProducts);
 
-// Ruta para obtener un producto por ID
-router.get('/:id', getProductById);
+// Ruta para obtener un producto por su ID
+router.get('/:id', productController.getProductById);
 
-// Ruta para actualizar un producto (requiere autenticación de administrador)
-//router.put('/:id', authMiddleware, updateProduct);
-router.put('/:id', updateProduct);
+// Ruta para crear un producto (requiere una imagen)
+router.post('/', upload.single('image'), productController.createProduct);
 
-// Ruta para eliminar un producto (requiere autenticación de administrador)
-//router.delete('/:id', authMiddleware, deleteProduct);
-router.delete('/:id', deleteProduct);
+// Ruta para actualizar un producto (requiere una imagen)
+router.put('/:id', upload.single('image'), productController.updateProduct);
+
+// Ruta para eliminar un producto
+router.delete('/:id', productController.deleteProduct);
+
 module.exports = router;

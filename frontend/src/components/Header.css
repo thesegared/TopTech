@@ -1,0 +1,56 @@
+/* Header.css */
+
+/* Asegura que los elementos dentro de la barra estén alineados a la derecha */
+.navbar-nav.ml-auto {
+    display: flex;
+    justify-content: flex-end;  /* Alinea los botones a la derecha */
+    align-items: center;
+  }
+  
+  /* Añadir más espacio entre los botones */
+  .nav-item {
+    margin-left: 20px;
+  }
+  
+  /* Estilo de los botones en la navbar */
+  .navbar .btn-outline-primary {
+    display: flex;
+    align-items: center;
+    border: 1px solid #007bff;
+    background-color: transparent;
+  }
+  
+  .navbar .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .navbar .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4081;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 50%;
+  }
+  
+  .navbar .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  /* Estilo para el icono de Cerrar Sesión */
+  .navbar .nav-item .btn-link {
+    color: #333;
+    font-size: 18px;
+    padding: 0;
+  }
+  
+  .navbar .nav-item .btn-link:hover {
+    color: #007bff;
+  }
+  
