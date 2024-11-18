@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');  // Asegúrate de que esta ruta esté bien configurada
+const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 const cloudinary = require('cloudinary').v2;  // Configuración de Cloudinary
 const path = require('path');
 const multer = require('multer');
@@ -56,6 +57,7 @@ app.get('/', (req, res) => {
 // Usar las rutas de usuario y producto
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);  // Asegúrate de que esta ruta esté configurada correctamente en productRoutes
+app.use('/api/cart', cartRoutes);
 
 // Configurar el puerto y escuchar
 const PORT = process.env.PORT || 5000;

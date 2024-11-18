@@ -100,7 +100,7 @@ function AddProductPage() {
           />
         </div>
         <div className="form-group">
-          <label>Descripción (opcional)</label>
+          <label>Descripción</label>
           <textarea
             className="form-control"
             value={description}

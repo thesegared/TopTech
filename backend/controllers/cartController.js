@@ -4,7 +4,7 @@ const Product = require('../models/Product');
 // Función para agregar un producto al carrito
 const addToCart = async (req, res) => {
     const { userId, productId } = req.body;
-    console.log('Datos recibidos en el backend:', req.body);  // Log para verificar datos recibidos
+    console.log('Datos recibidos en el backend:', req.body);
 
     try {
         // Buscar el producto en la base de datos
@@ -41,9 +41,9 @@ const addToCart = async (req, res) => {
     }
 };
 
-// Función para obtener el carrito de un usuario
 const getCart = async (req, res) => {
     try {
+        // Buscamos el carrito por el email del usuario (userId)
         const cart = await Cart.findOne({ userId: req.params.userId }).populate('items.productId');
         if (!cart) return res.status(404).json({ message: 'Carrito no encontrado' });
         res.status(200).json(cart);
@@ -53,4 +53,4 @@ const getCart = async (req, res) => {
     }
 };
 
-module.exports = { addToCart, getCart };
+module.exports = { getCart, addToCart };

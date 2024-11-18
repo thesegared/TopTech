@@ -1,56 +1,228 @@
-/* Header.css */
+/* Contenedor principal de la barra de navegación */
+.navbar {
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-/* Asegura que los elementos dentro de la barra estén alineados a la derecha */
-.navbar-nav.ml-auto {
-    display: flex;
-    justify-content: flex-end;  /* Alinea los botones a la derecha */
-    align-items: center;
-  }
-  
-  /* Añadir más espacio entre los botones */
-  .nav-item {
-    margin-left: 20px;
-  }
-  
-  /* Estilo de los botones en la navbar */
-  .navbar .btn-outline-primary {
-    display: flex;
-    align-items: center;
-    border: 1px solid #007bff;
-    background-color: transparent;
-  }
-  
-  .navbar .btn-outline-primary:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .navbar .badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: #ff4081;
-    color: white;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 50%;
-  }
-  
-  .navbar .nav-link {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  /* Estilo para el icono de Cerrar Sesión */
-  .navbar .nav-item .btn-link {
-    color: #333;
-    font-size: 18px;
-    padding: 0;
-  }
-  
-  .navbar .nav-item .btn-link:hover {
-    color: #007bff;
-  }
-  
+/* Logo de la marca */
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Contenedor de los elementos de la barra de navegación */
+.navbar-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Contenedor de la barra de búsqueda */
+.search-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Contenedor del select y del icono de hamburguesa */
+.category-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icono de hamburguesa */
+.hamburger-icon {
+  font-size: 20px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Estilo para el input de búsqueda */
+.search-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 350px; /* Ajustado el ancho del input */
+}
+
+.search-input input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 18px; /* Aumentado tamaño de fuente para mayor legibilidad */
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
+}
+
+.search-input input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Botón de búsqueda con el icono */
+.search-btn {
+  position: absolute;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Estilo para el select de categorías */
+.search-filter select {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  background-color: transparent;
+  width: 200px; /* Ajustado el ancho */
+  appearance: none;  /* Eliminar flecha hacia abajo */
+}
+
+.search-filter select::-ms-expand {
+  display: none; /* Eliminar la flecha en Internet Explorer */
+}
+
+/* Estilo del carrito de compras */
+.cart-icon {
+  position: relative;
+  display: inline-block;
+}
+
+/* Estilo para el botón de carrito con icono más grande */
+.cart-icon .btn-outline-primary {
+  padding: 8px 12px;
+  font-size: 20px; /* Aumentado el tamaño de la fuente del botón */
+  background-color: transparent;
+  border: none;
+  color: #333;
+}
+
+/* Estilo para el contador de productos en el carrito */
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 16px; /* Aumentado el tamaño del texto */
+  font-weight: bold;
+}
+
+/* Estilo del botón de iniciar sesión y registrar */
+.nav-link {
+  font-size: 20px;
+  color: #333;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+/* Estilo del icono de usuario */
+.navbar-nav .nav-item button {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Estilo del icono de usuario al hacer hover */
+.navbar-nav .nav-item button:hover {
+  color: #0056b3;
+}
+
+/* Estilo para el botón de cerrar sesión */
+.btn-logout {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #f44336;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  color: #d32f2f;
+}
+
+/* Contenedor del filtro de categoría */
+.category-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Contenedor del botón con icono y select */
+.category-btn {
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  background-color: #f1f1f1;
+  border-radius: 50px;
+  border: 2px solid #ccc;
+  width: auto;
+}
+
+/* Icono de hamburguesa */
+.hamburger-icon {
+  font-size: 20px;
+  color: #007bff;
+  margin-right: 8px; /* Espacio entre el icono y el select */
+}
+
+/* Estilo para el select dentro del contenedor */
+.category-btn select {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Estilo del recuadro de búsqueda */
+.search-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px; /* Ajusta el ancho según lo necesites */
+}
+
+.search-input input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 18px; /* Aumentado tamaño de fuente */
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
+}
+
+.search-input input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Botón de búsqueda con el icono */
+.search-btn {
+  position: absolute;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #007bff;
+  cursor: pointer;
+}

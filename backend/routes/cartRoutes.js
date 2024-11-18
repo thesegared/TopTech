@@ -1,6 +1,5 @@
 const express = require('express');
 const Cart = require('../models/Cart');
-const Product = require('../models/Product');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
 
@@ -8,9 +7,9 @@ const cartController = require('../controllers/cartController');
 router.post('/add', cartController.addToCart);  
 
 // Ruta para obtener el carrito de compras de un usuario
-router.get('/:userId', cartController.getCart);
+//router.get('/:userId', cartController.getCart);
 
-// Obtener el carrito de compras
+ // Obtener el carrito de compras
 router.get('/:userId', async (req, res) => {
     try {
       const cart = await Cart.findOne({ userId: req.params.userId }).populate('items.productId');
@@ -22,7 +21,7 @@ router.get('/:userId', async (req, res) => {
     }
   });
   
-
+ 
 
 // Actualizar cantidad del producto en el carrito
 router.put('/update/:cartItemId', async (req, res) => {

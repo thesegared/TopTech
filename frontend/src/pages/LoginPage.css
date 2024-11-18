@@ -1,0 +1,108 @@
+/* Contenedor principal */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Limita el ancho */
+  }
+  
+  .form-group {
+    margin-bottom: 20px; /* Más espacio entre los campos */
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para el campo de la contraseña */
+  .password-container {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Estilo para la casilla de "Recordarme" */
+  .form-group input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Estilo para el enlace "¿Perdiste tu contraseña?" */
+  a {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+ /* Estilo para la fila de "Recordarme" y "¿Olvidaste tu contraseña?" */
+.form-group-checkbox {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    align-items: center; /* Asegura que estén a la misma altura */
+  }
+  
+  .form-group-checkbox label {
+    margin: 0; /* Elimina margen entre el checkbox y el texto */
+    font-size: 14px; /* Asegura que el tamaño de letra sea igual */
+  }
+  
+  .form-group-checkbox input[type="checkbox"] {
+    margin-right: 10px; /* Espacio entre el checkbox y el texto */
+  }
+  
+  .form-group-checkbox a {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .form-group-checkbox a:hover {
+    text-decoration: underline;
+  }

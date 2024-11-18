@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import './ProductList.css';
-import { FaSearch } from 'react-icons/fa'; // Importamos el ícono de lupa
+import { FaSearch } from 'react-icons/fa';
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const categories = [
-    "Todas las Categorías", 
-    "Accesorios de Tecnología", 
-    "Audio y sonido", 
-    "Cámaras", 
-    "Cargadores, Cables y Pilas", 
-    "Celulares y Telefonía", 
-    "Computadores", 
-    "Dispositivos De Almacenamiento", 
-    "Drones", 
-    "Gaming", 
-    "Impresión e Insumos", 
-    "Soporte y Trípodes", 
-    "Televisión y video", 
+    "CATEGORÍAS",
+    "Accesorios de Tecnología",
+    "Audio y sonido",
+    "Cámaras",
+    "Cargadores, Cables y Pilas",
+    "Celulares y Telefonía",
+    "Computadores",
+    "Dispositivos De Almacenamiento",
+    "Drones",
+    "Gaming",
+    "Impresión e Insumos",
+    "Soporte y Trípodes",
+    "Televisión y video",
     "Otros"
 ];
 
@@ -49,8 +50,13 @@ function ProductList() {
     const handleCategoryChange = (e) => setCategoryFilter(e.target.value); // Filtrar por categoría
 
     const addToCart = async (productId) => {
-        const userId = 'userId123'; // Obtén el ID del usuario autenticado
-        console.log('Enviando al backend:', { userId, productId }); 
+        const userId = localStorage.getItem('userId'); // Asegúrate de que sea el correcto
+        if (!userId) {
+            alert('Usuario no identificado, inicia sesión para agregar productos al carrito');
+            return;
+        }
+
+        console.log('Enviando al backend:', { userId, productId });
 
         try {
             const response = await api.post('/cart/add', { userId, productId });
@@ -85,13 +91,18 @@ function ProductList() {
                         <FaSearch />
                     </button>
                 </div>
-                <select value={categoryFilter} onChange={handleCategoryChange}> {/* Filtra por categoría */}
-                    {categories.map((category) => (
-                        <option key={category} value={category === "Todas las Categorías" ? "" : category}>
-                            {category}
-                        </option>
-                    ))}
-                </select>
+                <div className="category-container">
+
+                    <select value={categoryFilter} onChange={handleCategoryChange}>
+
+                        {categories.map((category) => (
+
+                            <option key={category} value={category === "CATEGORÍAS" ? "" : category}>
+                                {category}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
             <div className="product-grid">
                 {products.length > 0 ? (

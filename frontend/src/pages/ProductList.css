@@ -1,40 +1,74 @@
+/* Estilo para el filtro de búsqueda */
 .search-filter {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     align-items: center;
+    width: 100%; /* Asegura que ocupe todo el espacio disponible */
 }
 
+/* Estilo para el contenedor de la categoría */
+.category-container {
+    display: flex;
+    align-items: center; /* Alinea el icono y el select verticalmente */
+    gap: 10px; /* Espacio entre el icono de hamburguesa y el select */
+}
+
+/* Estilo del icono de hamburguesa */
+.hamburger-icon {
+    font-size: 20px; /* Tamaño del icono */
+    color: #007bff; /* Color del icono */
+}
+
+/* Estilo para el select dentro de la categoría */
+.category-container select {
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+    width: 150px; /* Puedes ajustar el ancho aquí */
+}
+
+/* Barra de búsqueda */
 .search-input {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 25px;
     padding: 5px;
+    width: 100%; /* Ajusta el tamaño según tu preferencia */
 }
 
 .search-input input {
+    width: 100%; /* Asegura que el input ocupe todo el espacio disponible */
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 25px;
     border: none;
-    padding: 8px;
-    font-size: 14px;
-    width: 200px;
 }
 
+.search-input input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Estilo para el botón de búsqueda */
 .search-btn {
     background-color: #007bff;
     border: none;
-    padding: 8px;
+    padding: 10px;
     cursor: pointer;
     font-size: 16px;
     color: white;
-    border-radius: 5px;
-    margin-left: 5px;
+    border-radius: 25px;
 }
 
 .search-btn:hover {
     background-color: #0056b3;
 }
 
+/* Estilo para los productos en el grid */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -42,6 +76,7 @@
     margin-bottom: 30px;
 }
 
+/* Estilos de las tarjetas de producto */
 .product-card {
     background-color: #fff;
     border: 1px solid #ddd;
