@@ -1,0 +1,12 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+  }
+  
+  .main-content {
+    flex: 1; /* Ocupa el espacio restante entre Header y Footer */
+    padding: 20px; /* Ajusta el padding del contenido principal */
+    background-color: #f9f9f9; /* Fondo claro */
+  }
+  

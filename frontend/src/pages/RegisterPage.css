@@ -1,10 +1,11 @@
 .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1; /* Hace que ocupe todo el espacio disponible */
+  padding: 20px;
+  background-color: #f9f9f9;
   }
   
   .register-container h2 {

@@ -53,4 +53,28 @@ const getCart = async (req, res) => {
     }
 };
 
+const removeFromCart = async (req, res) => {
+    const { cartItemId } = req.params; // Obtener el ID del ítem desde los parámetros
+    const { userId } = req.body; // Obtener el userId desde el cuerpo de la solicitud (opcional si está relacionado con autenticación)
+
+    try {
+        // Buscar el carrito del usuario
+        const cart = await Cart.findOne({ userId });
+        if (!cart) return res.status(404).json({ message: 'Carrito no encontrado' });
+
+        // Filtrar para eliminar el producto específico del carrito
+        const updatedItems = cart.items.filter(item => item._id.toString() !== cartItemId);
+        if (updatedItems.length === cart.items.length) {
+            return res.status(404).json({ message: 'Producto no encontrado en el carrito' });
+        }
+
+        cart.items = updatedItems;
+        await cart.save(); // Guardar los cambios
+        res.status(200).json(cart);
+    } catch (error) {
+        console.error('Error al eliminar producto del carrito:', error);
+        res.status(500).json({ message: 'Error al eliminar producto del carrito', error });
+    }
+};
+
 module.exports = { getCart, addToCart };

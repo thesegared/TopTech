@@ -1,95 +1,116 @@
 /* Contenedor principal de la barra de navegación */
 .navbar {
-  background-color: #f8f9fa;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: #ffffff;
+  padding: 15px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* Logo de la marca */
 .navbar-brand {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #007bff;
   text-decoration: none;
+  transition: color 0.3s;
 }
 
-/* Contenedor de los elementos de la barra de navegación */
+.navbar-brand:hover {
+  color: #0056b3;
+}
+
+/* Botón de hamburguesa */
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+.hamburger-icon {
+  font-size: 24px;
+  color: #007bff;
+  transition: transform 0.3s;
+}
+
+.hamburger-icon:hover {
+  transform: rotate(90deg);
+}
+
+/* Contenedor de los elementos del menú */
 .navbar-nav {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
 }
 
-/* Contenedor de la barra de búsqueda */
-.search-filter {
+/* Botón de búsqueda */
+.search-input {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
+  width: 300px;
 }
 
-/* Contenedor del select y del icono de hamburguesa */
+.search-input input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.search-input input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.search-btn:hover {
+  color: #0056b3;
+}
+
+/* Categoría selector */
 .category-container {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Icono de hamburguesa */
-.hamburger-icon {
-  font-size: 20px;
-  color: #007bff;
-  cursor: pointer;
-}
-
-/* Estilo para el input de búsqueda */
-.search-input {
-  position: relative;
+.category-btn {
   display: flex;
   align-items: center;
-  width: 350px; /* Ajustado el ancho del input */
-}
-
-.search-input input {
-  width: 100%;
-  padding: 12px 20px;
-  font-size: 18px; /* Aumentado tamaño de fuente para mayor legibilidad */
+  padding: 8px 15px;
+  background-color: #f9f9f9;
   border-radius: 25px;
-  border: 2px solid #ccc;
-  box-sizing: border-box;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s;
 }
 
-.search-input input:focus {
-  border-color: #007bff;
-  outline: none;
+.category-btn:hover {
+  background-color: #f1f1f1;
 }
 
-/* Botón de búsqueda con el icono */
-.search-btn {
-  position: absolute;
-  right: 10px;
-  background-color: transparent;
+.category-btn select {
   border: none;
-  font-size: 20px;
-  color: #007bff;
-  cursor: pointer;
-}
-
-/* Estilo para el select de categorías */
-.search-filter select {
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 25px;
-  border: 2px solid #ccc;
-  background-color: transparent;
-  width: 200px; /* Ajustado el ancho */
-  appearance: none;  /* Eliminar flecha hacia abajo */
-}
-
-.search-filter select::-ms-expand {
-  display: none; /* Eliminar la flecha en Internet Explorer */
+  background: none;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  appearance: none;
 }
 
 /* Estilo del carrito de compras */
@@ -98,131 +119,70 @@
   display: inline-block;
 }
 
-/* Estilo para el botón de carrito con icono más grande */
 .cart-icon .btn-outline-primary {
-  padding: 8px 12px;
-  font-size: 20px; /* Aumentado el tamaño de la fuente del botón */
+  font-size: 18px;
+  padding: 10px 15px;
+  border: 1px solid #007bff;
+  border-radius: 50px;
   background-color: transparent;
-  border: none;
-  color: #333;
+  color: #007bff;
+  transition: all 0.3s;
 }
 
-/* Estilo para el contador de productos en el carrito */
-.cart-badge {
+.cart-icon .btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.cart-info {
   position: absolute;
-  top: -8px;
+  top: -10px;
   right: -10px;
   background-color: red;
-  color: white;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 8px;
   border-radius: 50%;
-  padding: 8px;
-  font-size: 16px; /* Aumentado el tamaño del texto */
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Estilo del botón de iniciar sesión y registrar */
-.nav-link {
-  font-size: 20px;
-  color: #333;
-  padding: 8px 12px;
-  text-decoration: none;
+/* Iconos y enlaces */
+.nav-item {
+  font-size: 18px;
 }
 
-.nav-link:hover {
+.nav-item .nav-link {
   color: #007bff;
+  transition: color 0.3s;
 }
 
-/* Estilo del icono de usuario */
-.navbar-nav .nav-item button {
-  background: none;
-  border: none;
-  color: #007bff;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* Estilo del icono de usuario al hacer hover */
-.navbar-nav .nav-item button:hover {
+.nav-item .nav-link:hover {
   color: #0056b3;
 }
 
-/* Estilo para el botón de cerrar sesión */
-.btn-logout {
+.nav-item .btn {
+  color: #007bff;
   background: none;
   border: none;
-  font-size: 20px;
-  color: #f44336;
-  cursor: pointer;
+  transition: color 0.3s;
 }
 
-.btn-logout:hover {
-  color: #d32f2f;
+.nav-item .btn:hover {
+  color: #0056b3;
 }
 
-/* Contenedor del filtro de categoría */
-.category-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Efectos responsivos */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
 }
 
-/* Contenedor del botón con icono y select */
-.category-btn {
-  display: flex;
-  align-items: center;
-  padding: 8px 20px;
-  background-color: #f1f1f1;
-  border-radius: 50px;
-  border: 2px solid #ccc;
-  width: auto;
-}
-
-/* Icono de hamburguesa */
-.hamburger-icon {
-  font-size: 20px;
-  color: #007bff;
-  margin-right: 8px; /* Espacio entre el icono y el select */
-}
-
-/* Estilo para el select dentro del contenedor */
-.category-btn select {
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  outline: none;
-  color: #333;
-  font-weight: bold;
-}
-
-/* Estilo del recuadro de búsqueda */
-.search-input {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 300px; /* Ajusta el ancho según lo necesites */
-}
-
-.search-input input {
-  width: 100%;
-  padding: 12px 20px;
-  font-size: 18px; /* Aumentado tamaño de fuente */
-  border-radius: 25px;
-  border: 2px solid #ccc;
-  box-sizing: border-box;
-}
-
-.search-input input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Botón de búsqueda con el icono */
-.search-btn {
-  position: absolute;
-  right: 10px;
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  color: #007bff;
-  cursor: pointer;
-}

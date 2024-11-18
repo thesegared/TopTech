@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaSignOutAlt, FaRegUser, FaSearch } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { RxHamburgerMenu } from "react-icons/rx";
+import { IoAppsSharp } from "react-icons/io5";
 import { jwtDecode } from 'jwt-decode';
 import './Header.css';
 import api from '../api';
+
 
 function Header() {
   const navigate = useNavigate();
@@ -40,15 +42,21 @@ function Header() {
   if (isAuthenticated) {
     try {
       const decodedToken = jwtDecode(token);
-      userRole = decodedToken.role; // Asumimos que el token tiene un campo "role"
-      const email = decodedToken.email; // Suponemos que el email está en el token
+      console.log(decodedToken); // Agrega esta línea para depurar el contenido del token
+      userRole = decodedToken.role;
+      const email = decodedToken.email;
       if (email && email !== userId) {
-        localStorage.setItem('userId', email); // Si está logueado, usamos el email como userId
+        localStorage.setItem('userId', email);
       }
     } catch (error) {
       console.error("Error al decodificar el token", error);
     }
   }
+
+  //console.log("Rol del usuario:", userRole); // Verifica el valor de userRole
+  //console.log("userId:", localStorage.getItem('userId')); // Depuración
+  //console.log("token:", token); // Depuración
+
 
   // Obtener los datos del carrito
   useEffect(() => {
@@ -135,6 +143,19 @@ function Header() {
         </div>
         */}
 
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <RxHamburgerMenu className="hamburger-icon" />
+        </button>
+
+
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             {/* Carrito de compras */}
@@ -154,26 +175,27 @@ function Header() {
               </Link>
             </li>
 
-            {/* Separador | entre el carrito y el icono de usuario */}
+            {/* Separador | */}
+            {userRole === 'admin' && (
+              <>
+                <span className="separator">|</span>
+                <li className="nav-item manage-products-icon">
+                  <Link className="nav-link" to="/admin/manage-products" title="Gestionar Productos">
+                    <IoAppsSharp className="icon-manage-products" />
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {/* Separador | entre "Gestionar Productos" e icono de usuario */}
             <span className="separator">|</span>
 
             {/* Icono de usuario y enlace a iniciar sesión o registrarse */}
             <li className="nav-item">
               {!isAuthenticated ? (
-                <>
-                  {/* Mostrar "Gestionar Productos" solo para el rol de administrador */}
-                  {userRole === 'admin' && (
-                    <>
-                      <span className="separator">|</span>
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/admin/manage-products">Gestionar Productos</Link>
-                      </li>
-                    </>
-                  )}
-                  <Link to="/login" title="Iniciar Sesión / Registrarse">
-                    <FaRegUser />
-                  </Link>
-                </>
+                <Link to="/login" title="Iniciar Sesión / Registrarse">
+                  <FaRegUser />
+                </Link>
               ) : (
                 <button className="btn btn-link nav-link" onClick={handleLogout} title="Cerrar Sesión">
                   <FaSignOutAlt />

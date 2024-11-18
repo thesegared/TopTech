@@ -15,12 +15,7 @@
 }
 
 /* Estilo general para los productos del carrito */
-.cart-items {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-}
+
 
 /* Estilo para el encabezado de la lista de productos */
 .cart-header {
@@ -47,11 +42,6 @@
 }
 
 /* Detalles del producto: imagen, nombre y eliminar */
-.cart-item-details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
 
 .cart-item-details img {
     width: 80px;
@@ -64,6 +54,55 @@
     font-weight: bold;
     margin-bottom: 5px;  /* Para espacio entre el nombre y el botón */
 }
+
+/* Detalles del producto: imagen y texto alineados horizontalmente */
+.cart-item-details {
+    display: flex; /* Alineación horizontal */
+    align-items: center; /* Centra verticalmente los elementos */
+    gap: 15px; /* Espacio entre imagen y texto */
+  }
+  
+  /* Imagen del producto */
+  .cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Información del producto */
+  .cart-item-info {
+    display: flex;
+    flex-direction: column; /* Alineación vertical del texto y botón eliminar */
+    justify-content: center; /* Centra verticalmente el contenido */
+  }
+  
+  .cart-item-info p {
+    margin: 0; /* Elimina márgenes del texto */
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  /* Botón eliminar debajo del texto */
+  .cart-item-remove {
+    margin-top: 5px; /* Espacio entre el texto y el botón */
+    font-size: 14px;
+    color: #dc3545; /* Color rojo para el botón */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre ícono y texto */
+  }
+  
+  .cart-item-remove:hover {
+    color: #c82333; /* Color más oscuro al pasar el cursor */
+  }
+  
+  .cart-item-remove svg {
+    font-size: 16px; /* Tamaño del ícono */
+  }
 
 .cart-item-remove {
     display: flex;
@@ -128,7 +167,7 @@
 }
 
 /* Resumen del carrito (total y vaciar carrito) */
-.cart-summary {
+/* .cart-summary {
     flex: 1;
     background-color: #fff;
     border-radius: 8px;
@@ -136,6 +175,32 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     text-align: center;
+} */
+
+.cart-summary {
+    flex: 1;
+    max-width: 25%; /* Tamaño máximo horizontal */
+    height: 50%; /* La altura se ajusta automáticamente al contenido */
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+    overflow: hidden; 
+  }
+  
+  /* Limitar altura si es necesario */
+/*   .cart-items {
+    max-height: 500px; // Altura máxima para la lista de productos 
+    overflow-y: auto; // Habilita desplazamiento vertical 
+  } */
+
+  .cart-items {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
 }
 
 /* Títulos y botones dentro de los totales */
@@ -180,4 +245,45 @@
 
 .cart-summary .btn-secondary:hover {
     background-color: #5a6268;
+}
+
+
+
+/* Botón "Limpiar Carrito" */
+.limpiar-carrito {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre el ícono y el texto */
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .limpiar-carrito svg {
+    font-size: 18px;
+    color: #dc3545;
+  }
+  
+  .limpiar-carrito:hover {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+  
+  .limpiar-carrito:active {
+    background-color: #f5c6cb;
+  }
+  
+  .container {
+    max-width: 1200px; /* Define un ancho máximo */
+    margin: 0 auto; /* Centra horizontalmente */
+    padding: 0 20px; /* Agrega espacio interno a los lados */
 }

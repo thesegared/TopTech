@@ -1,0 +1,14 @@
+html, body {
+    margin: 0; /* Elimina márgenes predeterminados */
+    padding: 0; /* Elimina paddings predeterminados */
+    height: 100%; /* Ocupa toda la altura de la ventana */
+    box-sizing: border-box; /* Ajusta márgenes y bordes correctamente */
+    overflow-x: hidden; /* Elimina scroll horizontal innecesario */
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que ocupe al menos toda la ventana */
+  }
+  
