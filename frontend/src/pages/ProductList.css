@@ -3,7 +3,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+    flex-wrap: nowrap;
+    /* Evita que los elementos se envuelvan */
     margin-bottom: 20px;
     gap: 15px;
     width: 100%;
@@ -64,8 +65,12 @@
     border: 1px solid #ccc;
     border-radius: 25px;
     padding: 5px 10px;
-    flex-grow: 1; /* Hace que ocupe el espacio sobrante */
-    max-width: 600px;
+    flex-grow: 1;
+    /* Permite que crezca más */
+    max-width: 700px;
+    /* Incrementa el ancho máximo */
+    width: 100%;
+    /* Se adapta al ancho disponible */
 }
 
 .search-input input {
@@ -75,6 +80,8 @@
     border: none;
     border-radius: 25px;
     outline: none;
+    width: 100%;
+    /* Asegura que se estire */
 }
 
 .search-input input:focus {
@@ -115,75 +122,81 @@
 /* Grid de productos */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribución uniforme */
+    gap: 20px; /* Espaciado entre las tarjetas */
+    margin: 0 auto; /* Centra el grid */
+    align-items: stretch; /* Asegura que todas las tarjetas tengan la misma altura */
 }
 
-/* Tarjeta de producto */
 .product-card {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 100%;
+    border: 1px solid #ddd; /* Mantén bordes suaves */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Evita que el contenido sobresalga */
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin: 0; /* Elimina márgenes extra */
+    padding: 0; /* Elimina relleno */
 }
 
 .product-card:hover {
     transform: translateY(-5px);
+    /* Pequeño efecto de elevación */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.product-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid #ddd;
-}
-
-.product-body {
-    padding: 15px;
-    text-align: center;
+    /* Sombra más pronunciada al pasar el cursor */
 }
 
 .product-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 10px 0 5px;
+    /* Reduce el margen inferior para disminuir el espacio */
+    text-align: center;
     color: #333;
 }
 
 .product-price {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     color: #e74c3c;
-    margin-bottom: 10px;
+    margin: 5px 0;
+    /* Reduce el margen superior e inferior */
 }
+
+.product-price-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Espacio inferior antes del botón */
+    min-height: 40px;
+    /* Define una altura mínima para que todos los precios estén alineados */
+}
+
+
+.product-img {
+    width: 100%;
+    /* La imagen ocupará todo el ancho del contenedor */
+    height: 150px;
+    /* Reduce la altura fija de las imágenes */
+    object-fit: contain;
+    /* Hace que las imágenes se ajusten dentro del espacio sin recortarlas */
+    border-bottom: 1px solid #ddd;
+    /* Línea de separación (opcional) */
+    padding: 10px;
+    /* Añade espacio interno alrededor de la imagen */
+    max-width: 100%; /* Impide que exceda el ancho del contenedor */
+    max-height: 100%; /* Impide que exceda la altura del contenedor */
+}
+
 
 .product-description {
     font-size: 14px;
     color: #666;
     margin-bottom: 15px;
-}
-
-.product-btn {
-    background-color: #1e3a8a;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.product-btn:hover {
-    background-color: #0056b3;
 }
 
 .product-badge {
@@ -197,6 +210,110 @@
     font-weight: bold;
     border-radius: 5px;
     z-index: 10;
+}
+
+/* Contenedor para alinear categorías y ordenamiento horizontalmente */
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+    /* Alinea ambos filtros al lado derecho */
+    flex-wrap: nowrap;
+    /* Evita que los elementos se envuelvan */
+}
+
+.category-container,
+.sort-container {
+    display: flex;
+    align-items: center;
+}
+
+.category-container select,
+.sort-container select {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-container select:focus,
+.sort-container select:focus {
+    border-color: #1e3a8a;
+    outline: none;
+}
+
+
+.product-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye uniformemente */
+    flex-grow: 1; /* Expande este contenedor para evitar espacios vacíos */
+    padding: 10px;
+    background-color: #f4f4f4; /* Fondo gris */
+}
+
+
+.product-btn {
+    width: 90%;
+    max-width: 200px;
+    margin-top: auto;
+    /* Empuja el botón hacia abajo */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.product-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.btn-link-text {
+    background: none;
+    border: none;
+    color: #1e3a8a;
+    /* Azul para que parezca un enlace */
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    /* Subrayado como un enlace */
+    padding: 0;
+    /* Elimina cualquier relleno extra */
+    margin: 5px 0;
+    /* Espaciado opcional */
+    transition: color 0.3s ease;
+}
+
+.btn-link-text:hover {
+    color: #3b82f6;
+    /* Cambia a un tono más claro al pasar el cursor */
+    text-decoration: none;
+    /* Elimina el subrayado temporalmente */
+}
+
+.product-footer {
+    display: flex;
+    flex-direction: column;
+    /* Alinea los elementos verticalmente */
+    justify-content: flex-end;
+    /* Empuja el contenido al final del contenedor */
+    align-items: center;
+    /* Centra los elementos horizontalmente */
+    margin-top: auto;
+    /* Empuja el footer hacia abajo */
+    gap: 10px;
+    /* Espacio entre el precio y el botón */
 }
 
 /* Responsividad */
@@ -216,85 +333,16 @@
     .product-btn {
         font-size: 12px;
     }
-}
 
-/* Contenedor para alinear categorías y ordenamiento horizontalmente */
-.filters {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    justify-content: flex-end; /* Alinea ambos filtros al lado derecho */
-    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
-}
+    .product-img {
+        height: 120px;
+        /* Reduce aún más la altura de las imágenes en pantallas pequeñas */
+    }
 
-.category-container, .sort-container {
-    display: flex;
-    align-items: center;
-}
+    .product-body {
+        height: auto;
+        /* Permite que el contenido se ajuste dinámicamente */
+    }
 
-.category-container select, .sort-container select {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    padding: 8px 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
-.category-container select:focus, .sort-container select:focus {
-    border-color: #1e3a8a;
-    outline: none;
 }
-
-.product-body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Asegura que los elementos estén alineados arriba */
-    align-items: center; /* Centra los elementos horizontalmente */
-}
-
-.product-btn {
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    max-width: 200px; /* Ajusta un ancho máximo */
-    margin: 10px 0; /* Espaciado entre los elementos */
-    background-color: #1e3a8a;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.product-btn:hover {
-    background-color: #0056b3;
-}
-
-/* Asegura que los productos se alineen consistentemente */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-    align-items: start; /* Alinea todos los productos al inicio verticalmente */
-}
-
-.btn-link-text {
-    background: none;
-    border: none;
-    color: #1e3a8a; /* Azul para que parezca un enlace */
-    font-size: 14px;
-    cursor: pointer;
-    text-decoration: underline; /* Subrayado como un enlace */
-    padding: 0; /* Elimina cualquier relleno extra */
-    margin: 5px 0; /* Espaciado opcional */
-    transition: color 0.3s ease;
-  }
-  
-  .btn-link-text:hover {
-    color: #3b82f6; /* Cambia a un tono más claro al pasar el cursor */
-    text-decoration: none; /* Elimina el subrayado temporalmente */
-  }

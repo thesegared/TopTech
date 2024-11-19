@@ -132,31 +132,25 @@ function ProductList() {
               <div className="product-body">
                 {product.onSale && <div className="product-badge">OFERTA</div>}
                 <h5 className="product-title">{product.name}</h5>
-                <p className="product-price">
-                  {new Intl.NumberFormat("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                  }).format(product.price)}
-                </p>
-                {showDescription[product._id] && (
-                  <p className="product-description">{product.description}</p>
-                )}
-                <button
-                  onClick={() => addToCart(product._id)}
-                  className="btn btn-primary product-btn"
-                >
-                  Añadir al carrito
-                </button>
-                <button
-                  onClick={() => toggleDescription(product._id)}
-                  className="btn-link-text"
-                >
-                  {showDescription[product._id] ? "Ver menos..." : "Ver más..."}
-                </button>
+                <div className="product-footer">
+                  <p className="product-price">
+                    {new Intl.NumberFormat("es-CO", {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    }).format(product.price)}
+                  </p>
+                  <button
+                    onClick={() => addToCart(product._id)}
+                    className="btn btn-primary product-btn"
+                  >
+                    Añadir al carrito
+                  </button>
+                </div>
               </div>
             </div>
+
           ))
         ) : (
           <p>No se encontraron productos.</p>
