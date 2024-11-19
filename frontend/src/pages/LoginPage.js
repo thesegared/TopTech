@@ -100,8 +100,8 @@ function LoginPage() {
           <label>Recordarme</label>
         </div>
         <button type="submit" className="btn btn-primary">Ingresar</button>
-        <Link to="/register">
-          <button type="button" className="btn btn btn-green">Crear Cuenta</button>
+        <Link to="/register" className="btn-link">
+          <button type="button" className="btn btn-green">Crear Cuenta</button>
         </Link>
 
         <p className="register-message">

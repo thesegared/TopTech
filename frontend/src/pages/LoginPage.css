@@ -22,7 +22,8 @@
 
 /* Mensajes de login */
 .login-message {
-  color: #e63946; /* Rojo para mensajes de error */
+  color: #e63946;
+  /* Rojo para mensajes de error */
   text-align: center;
   margin-bottom: 15px;
   font-size: 14px;
@@ -77,57 +78,10 @@ label {
   font-size: 20px;
 }
 
-/* Contenedor de "Recordarme" */
-.form-group-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.form-group-checkbox input {
-  margin-right: 5px; /* Espaciado entre el checkbox y el label */
-}
-
 label {
   margin: 0;
   font-size: 14px;
   color: #333;
-}
-
-/* Botones generales */
-.btn {
-  width: 100%; /* Ambos botones ocuparán el mismo ancho */
-  padding: 12px; /* Mismo padding para ambos */
-  font-size: 16px; /* Mismo tamaño de fuente */
-  font-weight: bold; /* Misma fuente */
-  color: white; /* Color del texto */
-  border: none; /* Sin borde */
-  border-radius: 5px; /* Bordes redondeados iguales */
-  cursor: pointer; /* Cursor tipo botón */
-  transition: all 0.3s ease; /* Animación suave */
-}
-
-/* Botón "Ingresar" */
-.btn-primary {
-  background-color: #1e3a8a; /* Azul */
-}
-
-.btn-primary:hover {
-  background-color: #3b82f6;
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Botón "Crear Cuenta" */
-.btn-green {
-  background-color: #28a745; /* Verde */
-}
-
-.btn-green:hover {
-  background-color: #218838;
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Mensaje de registro */
@@ -174,4 +128,91 @@ label {
 .back-button:hover {
   color: #3b82f6;
   transform: scale(1.1);
+}
+
+
+/* Ajusta la alineación y el espacio del checkbox y el texto */
+.form-group-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-group-checkbox input {
+  margin: 0;
+  /* Elimina márgenes del checkbox */
+  width: auto;
+  /* Asegura que el checkbox no estire su contenedor */
+}
+
+.form-group-checkbox label {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  /* Elimina márgenes del texto */
+  white-space: nowrap;
+  /* Evita que el texto se divida en varias líneas */
+}
+
+.btn-link {
+  text-decoration: none;
+  /* Elimina el subrayado del enlace */
+  display: block;
+  width: 100%;
+  /* Asegura que ocupa el mismo ancho que el botón */
+}
+
+/* Asegura que ambos botones tengan el mismo estilo */
+.login-container .btn-primary,
+.login-container .btn-green {
+  display: block;
+  /* Asegura que los botones sean elementos de bloque */
+  width: 80%;
+  /* Ambos ocupan el mismo ancho */
+  padding: 12px;
+  /* Consistente relleno interno */
+  font-size: 16px;
+  /* Mismo tamaño de fuente */
+  font-weight: bold;
+  /* Misma fuente */
+  color: white;
+  /* Texto blanco */
+  border: none;
+  /* Sin borde */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  cursor: pointer;
+  /* Cursor en forma de mano */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-align: center;
+  /* Centra el texto dentro del botón */
+  margin: 0 auto;
+  /* Centra los botones horizontalmente */
+}
+
+/* Botón "Ingresar" */
+.login-container .btn-primary {
+  background-color: #1e3a8a;
+  /* Azul */
+}
+
+.login-container .btn-primary:hover {
+  background-color: #3b82f6;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón "Crear Cuenta" */
+.login-container .btn-green {
+  background-color: #28a745;
+  /* Verde */
+  margin-top: 15px;
+  /* Espacio entre los botones */
+}
+
+.login-container .btn-green:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
-const { upload } = require('../controllers/productController'); // Asegúrate de que el controlador exporte 'upload'
+const { upload } = require('../controllers/productController');
 
 // Ruta para obtener todos los productos
 router.get('/', productController.getProducts);
+
+// Ruta para obtener los productos más recientes
+router.get('/recent', productController.getRecentProducts);
 
 // Ruta para obtener un producto por su ID
 router.get('/:id', productController.getProductById);

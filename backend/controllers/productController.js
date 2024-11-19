@@ -72,7 +72,7 @@ const createProduct = async (req, res) => {
 // Obtener todos los productos
 const getProducts = async (req, res) => {
   try {
-    const { search, category } = req.query; // Recibimos los parámetros de búsqueda y categoría
+    const { search, category, sort } = req.query; // Añadimos 'sort' a los parámetros de consulta
 
     const filter = {};
 
@@ -84,11 +84,34 @@ const getProducts = async (req, res) => {
       filter.name = { $regex: search, $options: 'i' }; // Filtrar por búsqueda de nombre de producto
     }
 
-    const products = await Product.find(filter); // Obtener los productos con los filtros
+    let sortOption = {}; // Inicializamos un objeto vacío para el ordenamiento
+    if (sort === 'newest') {
+      sortOption = { createdAt: -1 }; // Más recientes primero
+    } else if (sort === 'oldest') {
+      sortOption = { createdAt: 1 }; // Más antiguos primero
+    } else if (sort === 'priceAsc') {
+      sortOption = { price: 1 }; // Precio de menor a mayor
+    } else if (sort === 'priceDesc') {
+      sortOption = { price: -1 }; // Precio de mayor a menor
+    }
+
+    const products = await Product.find(filter).sort(sortOption); // Añadimos el ordenamiento
     res.status(200).json(products);
   } catch (error) {
     console.error('Error al obtener los productos:', error);
     res.status(500).json({ message: 'Error al obtener los productos', error });
+  }
+};
+
+const getRecentProducts = async (req, res) => {
+  try {
+    const recentProducts = await Product.find({})
+      .sort({ createdAt: -1 }) // Ordenar por fecha de creación (más recientes primero)
+      .limit(5); // Limitar a los 5 productos más recientes
+    res.status(200).json(recentProducts);
+  } catch (error) {
+    console.error('Error al obtener productos recientes:', error);
+    res.status(500).json({ message: 'Error al obtener productos recientes', error });
   }
 };
 
@@ -154,6 +177,7 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   createProduct,
   getProducts,
+  getRecentProducts,
   getProductById,
   updateProduct,
   deleteProduct,
