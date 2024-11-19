@@ -99,10 +99,14 @@ function LoginPage() {
         </div>
 
         <button type="submit" className="btn btn-primary">Ingresar</button>
-
         <Link to="/register">
-          <button type="button" className="btn btn-secundary">Crear Cuenta</button>
+          <button type="button" className="btn-create-account">Crear Cuenta</button>
         </Link>
+
+        <p className="register-message">
+          ¿Aún no tienes cuenta? <Link to="/register" className="link-highlight">Regístrate aquí</Link>
+        </p>
+
       </form>
     </div>
   );

@@ -4,109 +4,166 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1; /* Hace que ocupe todo el espacio disponible */
+  flex-grow: 1;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--background-light); /* Fondo claro */
 }
 
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px; /* Limita el ancho */
-  }
-  
-  .form-group {
-    margin-bottom: 20px; /* Más espacio entre los campos */
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos para el campo de la contraseña */
-  .password-container {
-    position: relative;
-  }
-  
-  .password-toggle {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Estilo para la casilla de "Recordarme" */
-  .form-group input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  
-  /* Estilo para el enlace "¿Perdiste tu contraseña?" */
-  a {
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
- /* Estilo para la fila de "Recordarme" y "¿Olvidaste tu contraseña?" */
-.form-group-checkbox {
-    display: flex;
-    justify-content: space-between; /* Alinea los elementos a los extremos */
-    align-items: center; /* Asegura que estén a la misma altura */
-  }
-  
-  .form-group-checkbox label {
-    margin: 0; /* Elimina margen entre el checkbox y el texto */
-    font-size: 14px; /* Asegura que el tamaño de letra sea igual */
-  }
-  
-  .form-group-checkbox input[type="checkbox"] {
-    margin-right: 10px; /* Espacio entre el checkbox y el texto */
-  }
-  
-  .form-group-checkbox a {
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .form-group-checkbox a:hover {
-    text-decoration: underline;
-  }
+/* Título */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-size: 28px;
+}
 
-  
+/* Mensajes de login */
+.login-message {
+  color: var(--highlight-color); /* Resalta el mensaje */
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Estilo del formulario */
+form {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Grupos del formulario */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 16px;
+  color: var(--text-light);
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; /* Para evitar desbordes */
+}
+
+/* Contenedor de contraseña */
+.password-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px; /* Ajusta la distancia desde el borde derecho */
+  top: 50%;
+  transform: translateY(-130%); /* Centra perfectamente el ícono verticalmente */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  font-size: 20px; /* Ajusta el tamaño del ícono */
+  display: flex;
+  align-items: center; /* Centra el ícono dentro del botón */
+  justify-content: center;
+}
+
+/* Botones */
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Estilo del botón "Ingresar" */
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: var(--highlight-color);
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo del botón "Crear Cuenta" */
+.btn-create-account {
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-create-account:hover {
+  background-color: #0d6922;
+  color: #ffffff;;
+  transform: scale(1.05); /* Efecto de aumento */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Checkbox y enlaces */
+.form-group-checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label {
+  margin: 0;
+  font-size: 14px;
+}
+
+a {
+  color: var(--highlight-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.register-message {
+  margin-top: 20px;
+  font-size: 16px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.link-highlight {
+  color: var(--highlight-color);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.link-highlight:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--text-light); /* Línea sutil */
+  margin: 20px 0; /* Espaciado vertical */
+  opacity: 0.6; /* Hace la línea más tenue */
+}

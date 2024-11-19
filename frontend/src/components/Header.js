@@ -1,147 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaSignOutAlt, FaRegUser, FaSearch } from 'react-icons/fa';
-import { MdOutlineShoppingCart } from 'react-icons/md';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoAppsSharp } from "react-icons/io5";
-import { jwtDecode } from 'jwt-decode';
-import './Header.css';
-import api from '../api';
-
+import { FaRegUser, FaSignOutAlt } from "react-icons/fa";
+import "./Header.css";
+import logo from "../assets/logo.png";
+import { useCart } from "../contexts/CartContext";
 
 function Header() {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token'); // Obtener el token del almacenamiento local
+  const token = localStorage.getItem("token");
   const isAuthenticated = !!token;
-  const [cartItemCount, setCartItemCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
 
-  const [searchTerm, setSearchTerm] = useState('');  // Estado para el término de búsqueda
-  const [categoryFilter, setCategoryFilter] = useState('');  // Estado para el filtro de categoría
-
-
-  // Estado para los productos obtenidos de la API
-  const [products, setProducts] = useState([]);
-
-  const handleSearchChange = (e) => setSearchTerm(e.target.value);  // Cambia el término de búsqueda
-  const handleCategoryChange = (e) => setCategoryFilter(e.target.value);  // Cambia el filtro de categoría
-
-  // Función para generar un userId temporal para usuarios invitados
-  const generateGuestUserId = () => {
-    const guestId = Math.random().toString(36).substring(2, 15); // Genera un ID aleatorio
-    localStorage.setItem('userId', guestId);  // Guarda el ID en el localStorage
-    return guestId;
-  };
-
-  // Si no existe, generamos un userId temporal o usamos el del localStorage
-  const userId = localStorage.getItem('userId') || generateGuestUserId();
-
-  let userRole = null;
-
-  // Verificamos si el token está disponible antes de intentar decodificarlo
-  if (isAuthenticated) {
-    try {
-      const decodedToken = jwtDecode(token);
-      console.log(decodedToken); // Agrega esta línea para depurar el contenido del token
-      userRole = decodedToken.role;
-      const email = decodedToken.email;
-      if (email && email !== userId) {
-        localStorage.setItem('userId', email);
-      }
-    } catch (error) {
-      console.error("Error al decodificar el token", error);
-    }
-  }
-
-  //console.log("Rol del usuario:", userRole); // Verifica el valor de userRole
-  //console.log("userId:", localStorage.getItem('userId')); // Depuración
-  //console.log("token:", token); // Depuración
-
-
-  // Obtener los datos del carrito
-  useEffect(() => {
-    const fetchCart = async () => {
-      if (userId) {
-        try {
-          const response = await fetch(`/api/cart/${userId}`);
-          const cart = await response.json();
-          setCartItemCount(cart.items.length); // Actualiza el número de productos en el carrito
-
-          // Calcular el total del carrito
-          const totalAmount = cart.items.reduce((acc, item) => {
-            return acc + item.productId.price * item.quantity;
-          }, 0);
-          setTotalPrice(totalAmount); // Establece el precio total
-        } catch (error) {
-          console.error('Error al obtener el carrito:', error);
-        }
-      }
-    };
-
-    fetchCart();
-  }, [userId]);  // Esto depende de userId, así que se vuelve a ejecutar si cambia
-
-  // Función para obtener los productos desde la API
-  const fetchProducts = async () => {
-    try {
-      const response = await api.get('/products', {
-        params: {
-          search: searchTerm,
-          category: categoryFilter
-        }
-      });
-      setProducts(response.data); // Guarda los productos en el estado
-    } catch (error) {
-      console.error('Error al obtener productos:', error);
-    }
-  };
-
-  // Llamada a la API para obtener los productos al montar el componente o cuando cambia la búsqueda
-  useEffect(() => {
-    fetchProducts();
-  }, [searchTerm, categoryFilter]); // Recorre cuando el término de búsqueda o la categoría cambian
+  const { cartItemCount, totalPrice } = useCart(); // Obtener datos centralizados del contexto
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Eliminar el token JWT
-    localStorage.removeItem('userId'); // Eliminar el userId temporal o registrado
-    navigate('/login'); // Redirigir al login
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/login");
   };
-
-
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link className="navbar-brand" to="/">TopTech</Link>
-
-        {/* Buscador y filtro en el header 
-        <div className="search-filter">
-          <div className="category-container">
-            <button className="category-btn">
-              <RxHamburgerMenu className="hamburger-icon" />
-              <select value={categoryFilter} onChange={handleCategoryChange}>
-                {categories.map((category) => (
-                  <option key={category} value={category === "CATEGORÍAS" ? "" : category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </button>
-          </div>
-          
-          <div className="search-input">
-            <input
-              type="text"
-              placeholder="Buscar productos..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <button className="search-btn">
-              <FaSearch />
-            </button>
-          </div>
+        <div className="navbar-brand">
+          <Link to="/">
+            <img src={logo} alt="TopTech Logo" className="logo" />
+          </Link>
         </div>
-        */}
 
         <button
           className="navbar-toggler"
@@ -155,54 +42,35 @@ function Header() {
           <RxHamburgerMenu className="hamburger-icon" />
         </button>
 
+        <div className="nav-icons-container">
+          <Link to="/cart" title="Carrito de Compras" className="cart-link">
+            <div className="cart-details">
+              <span className="cart-total">
+                {new Intl.NumberFormat("es-CO", {
+                  style: "currency",
+                  currency: "COP",
+                }).format(totalPrice || 0)} {/* Mostrar el total del carrito */}
+              </span>
+              <MdOutlineShoppingCart className="nav-icon" />
+              <span className="cart-count">{cartItemCount}</span> {/* Mostrar la cantidad de ítems */}
+            </div>
+          </Link>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
-            {/* Carrito de compras */}
-            <li className="nav-item cart-icon">
-              <Link to="/cart">
-                <button className="btn btn-outline-primary" title="Carrito de Compras">
-                  <MdOutlineShoppingCart />
-                  {cartItemCount > 0 && (
-                    <div className="cart-info">
-                      <span className="cart-total">
-                        {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(totalPrice)}
-                      </span>
-                      <span className="badge badge-light">{cartItemCount}</span>
-                    </div>
-                  )}
-                </button>
-              </Link>
-            </li>
+          {isAuthenticated && (
+            <Link to="/admin/manage-products" title="Gestionar Productos">
+              <IoAppsSharp className="nav-icon" />
+            </Link>
+          )}
 
-            {/* Separador | */}
-            {userRole === 'admin' && (
-              <>
-                <span className="separator">|</span>
-                <li className="nav-item manage-products-icon">
-                  <Link className="nav-link" to="/admin/manage-products" title="Gestionar Productos">
-                    <IoAppsSharp className="icon-manage-products" />
-                  </Link>
-                </li>
-              </>
-            )}
-
-            {/* Separador | entre "Gestionar Productos" e icono de usuario */}
-            <span className="separator">|</span>
-
-            {/* Icono de usuario y enlace a iniciar sesión o registrarse */}
-            <li className="nav-item">
-              {!isAuthenticated ? (
-                <Link to="/login" title="Iniciar Sesión / Registrarse">
-                  <FaRegUser />
-                </Link>
-              ) : (
-                <button className="btn btn-link nav-link" onClick={handleLogout} title="Cerrar Sesión">
-                  <FaSignOutAlt />
-                </button>
-              )}
-            </li>
-          </ul>
+          {!isAuthenticated ? (
+            <Link to="/login" title="Iniciar Sesión / Registrarse">
+              <FaRegUser className="nav-icon" />
+            </Link>
+          ) : (
+            <button className="nav-icon btn" onClick={handleLogout} title="Cerrar Sesión">
+              <FaSignOutAlt />
+            </button>
+          )}
         </div>
       </div>
     </nav>

@@ -1,0 +1,41 @@
+/* Contenedor principal del Footer */
+.footer {
+    background-color: var(--secondary-color); /* Color secundario */
+    color: var(--text-light); /* Texto claro */
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    position: relative;
+    z-index: 1000;
+  }
+  
+  /* Línea divisoria */
+  .footer hr {
+    border: 0;
+    height: 1px;
+    background: var(--text-light); /* Texto claro */
+    margin: 10px 0;
+    opacity: 0.5;
+  }
+  
+  /* Texto */
+  .footer p {
+    margin: 0;
+    color: var(--text-light); /* Texto claro */
+    font-size: 14px;
+  }
+  
+  /* Efecto hover para enlaces */
+  .footer a {
+    color: var(--highlight-color); /* Color de resaltado */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .footer a:hover {
+    color: var(--text-light); /* Cambia a claro en hover */
+    text-decoration: underline;
+  }
+  
