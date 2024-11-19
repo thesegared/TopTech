@@ -1,33 +1,60 @@
-/* Estilo para el filtro de búsqueda */
+/* Contenedor principal del filtro */
 .search-filter {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
     align-items: center;
-    width: 100%; /* Asegura que ocupe todo el espacio disponible */
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+    margin-bottom: 20px;
+    gap: 15px;
+    width: 100%;
 }
 
-/* Estilo para el contenedor de la categoría */
+/* Contenedor de la categoría con el icono de hamburguesa */
 .category-container {
     display: flex;
-    align-items: center; /* Alinea el icono y el select verticalmente */
-    gap: 10px; /* Espacio entre el icono de hamburguesa y el select */
+    align-items: center;
+    gap: 10px;
 }
 
-/* Estilo del icono de hamburguesa */
-.hamburger-icon {
-    font-size: 20px; /* Tamaño del icono */
-    color: #1e3a8a; /* Color del icono */
-}
-
-/* Estilo para el select dentro de la categoría */
 .category-container select {
-    background-color: transparent;
-    border: none;
-    padding: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 8px;
     font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-container select:focus {
+    border-color: #1e3a8a;
     outline: none;
-    width: 150px; /* Puedes ajustar el ancho aquí */
+}
+
+.hamburger-icon {
+    font-size: 20px;
+    color: #1e3a8a;
+    cursor: pointer;
+}
+
+.hamburger-icon:hover {
+    color: #3b82f6;
+}
+
+/* Contenedor del selector de ordenamiento */
+.sort-container select {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-container select:focus {
+    border-color: #1e3a8a;
+    outline: none;
 }
 
 /* Barra de búsqueda */
@@ -36,16 +63,18 @@
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 25px;
-    padding: 5px;
-    width: 100%; /* Ajusta el tamaño según tu preferencia */
+    padding: 5px 10px;
+    flex-grow: 1; /* Hace que ocupe el espacio sobrante */
+    max-width: 600px;
 }
 
 .search-input input {
-    width: 100%; /* Asegura que el input ocupe todo el espacio disponible */
-    padding: 10px 15px;
+    flex: 1;
+    padding: 10px;
     font-size: 16px;
-    border-radius: 25px;
     border: none;
+    border-radius: 25px;
+    outline: none;
 }
 
 .search-input input:focus {
@@ -53,46 +82,60 @@
     outline: none;
 }
 
-/* Estilo para el botón de búsqueda */
 .search-btn {
     background-color: #1e3a8a;
     border: none;
-    padding: 10px;
-    cursor: pointer;
+    padding: 10px 15px;
     font-size: 16px;
     color: white;
     border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .search-btn:hover {
-    background-color: #0056b3;
+    background-color: #3b82f6;
 }
 
-/* Estilo para los productos en el grid */
+.search-btn {
+    background-color: #1e3a8a;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #3b82f6;
+}
+
+/* Grid de productos */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
-/* Estilos de las tarjetas de producto */
+/* Tarjeta de producto */
 .product-card {
+    position: relative;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 100%;
-    padding: 20px;
-    text-align: center;
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -100,25 +143,26 @@
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-radius: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .product-body {
-    padding-top: 15px;
+    padding: 15px;
+    text-align: center;
 }
 
 .product-title {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    text-transform: uppercase; /* Nombres en mayúsculas */
-    margin: 10px 0;
+    margin-bottom: 10px;
     color: #333;
 }
 
 .product-price {
-    font-size: 18px;
-    color: #333;
-    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 10px;
 }
 
 .product-description {
@@ -128,19 +172,18 @@
 }
 
 .product-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
+    background-color: #1e3a8a;
     color: white;
-    background-color: #e74c3c;
     border: none;
+    padding: 10px;
     border-radius: 5px;
+    font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .product-btn:hover {
-    background-color: #c0392b;
+    background-color: #0056b3;
 }
 
 .product-badge {
@@ -156,20 +199,102 @@
     z-index: 10;
 }
 
+/* Responsividad */
 @media (max-width: 768px) {
     .product-card {
         height: auto;
     }
 
     .product-title {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .product-price {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .product-btn {
         font-size: 12px;
     }
 }
+
+/* Contenedor para alinear categorías y ordenamiento horizontalmente */
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end; /* Alinea ambos filtros al lado derecho */
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+}
+
+.category-container, .sort-container {
+    display: flex;
+    align-items: center;
+}
+
+.category-container select, .sort-container select {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-container select:focus, .sort-container select:focus {
+    border-color: #1e3a8a;
+    outline: none;
+}
+
+.product-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Asegura que los elementos estén alineados arriba */
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.product-btn {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 200px; /* Ajusta un ancho máximo */
+    margin: 10px 0; /* Espaciado entre los elementos */
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Asegura que los productos se alineen consistentemente */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    align-items: start; /* Alinea todos los productos al inicio verticalmente */
+}
+
+.btn-link-text {
+    background: none;
+    border: none;
+    color: #1e3a8a; /* Azul para que parezca un enlace */
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline; /* Subrayado como un enlace */
+    padding: 0; /* Elimina cualquier relleno extra */
+    margin: 5px 0; /* Espaciado opcional */
+    transition: color 0.3s ease;
+  }
+  
+  .btn-link-text:hover {
+    color: #3b82f6; /* Cambia a un tono más claro al pasar el cursor */
+    text-decoration: none; /* Elimina el subrayado temporalmente */
+  }

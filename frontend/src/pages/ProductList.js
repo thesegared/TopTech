@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import api from "../api";
 import "./ProductList.css";
 import { FaSearch } from "react-icons/fa";
-import { useCart } from "../contexts/CartContext"; // Importa el contexto del carrito
+import { GiHamburgerMenu } from "react-icons/gi"; // Icono de hamburguesa
+import { useCart } from "../contexts/CartContext";
 
 const categories = [
-  "CATEGORÍAS",
+  "Categorías",
   "Accesorios de Tecnología",
   "Audio y sonido",
   "Cámaras",
@@ -21,19 +22,28 @@ const categories = [
   "Otros",
 ];
 
+const sortOptions = [
+  { value: "", label: "Ordenar por" },
+  { value: "newest", label: "Más recientes" },
+  { value: "oldest", label: "Más antiguos" },
+  { value: "priceAsc", label: "Menor a Mayor precio" },
+  { value: "priceDesc", label: "Mayor a Menor precio" },
+];
+
 function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
+  const [sortFilter, setSortFilter] = useState(""); // Nuevo estado para el criterio de ordenamiento
   const [showDescription, setShowDescription] = useState({});
-  const { fetchCart } = useCart(); // Usa el contexto del carrito
+  const { fetchCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await api.get("/products", {
-          params: { search: searchTerm, category: categoryFilter },
+          params: { search: searchTerm, category: categoryFilter, sort: sortFilter },
         });
         setProducts(response.data);
         setLoading(false);
@@ -44,17 +54,18 @@ function ProductList() {
     };
 
     fetchProducts();
-  }, [searchTerm, categoryFilter]);
+  }, [searchTerm, categoryFilter, sortFilter]);
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
   const handleCategoryChange = (e) => setCategoryFilter(e.target.value);
+  const handleSortChange = (e) => setSortFilter(e.target.value);
 
   const addToCart = async (productId) => {
-    const userId = localStorage.getItem("userId") || "guest"; // Usa "guest" si no hay un userId
+    const userId = localStorage.getItem("userId") || "guest";
 
     try {
       await api.post("/cart/add", { userId, productId });
-      await fetchCart(); // Llama a fetchCart para actualizar el estado global del carrito
+      await fetchCart();
     } catch (error) {
       console.error("Error al agregar al carrito:", error);
       alert("Hubo un error al agregar el producto al carrito");
@@ -84,17 +95,29 @@ function ProductList() {
             <FaSearch />
           </button>
         </div>
-        <div className="category-container">
-          <select value={categoryFilter} onChange={handleCategoryChange}>
-            {categories.map((category) => (
-              <option
-                key={category}
-                value={category === "CATEGORÍAS" ? "" : category}
-              >
-                {category}
-              </option>
-            ))}
-          </select>
+        <div className="filters">
+          <div className="category-container">
+
+            <select value={categoryFilter} onChange={handleCategoryChange}>
+              {categories.map((category) => (
+                <option
+                  key={category}
+                  value={category === "Categorías" ? "" : category}
+                >
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="sort-container">
+            <select value={sortFilter} onChange={handleSortChange}>
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
       <div className="product-grid">
@@ -128,7 +151,7 @@ function ProductList() {
                 </button>
                 <button
                   onClick={() => toggleDescription(product._id)}
-                  className="btn btn-link"
+                  className="btn-link-text"
                 >
                   {showDescription[product._id] ? "Ver menos..." : "Ver más..."}
                 </button>

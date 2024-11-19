@@ -4,35 +4,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
-  padding: 20px;
-  background-color: var(--background-light); /* Fondo claro */
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Título */
-h2 {
-  text-align: center;
+.login-container h2 {
   margin-bottom: 20px;
-  color: var(--primary-color);
-  font-size: 28px;
+  font-size: 24px;
+  color: #1e3a8a;
+  text-align: center;
 }
 
 /* Mensajes de login */
 .login-message {
-  color: var(--highlight-color); /* Resalta el mensaje */
+  color: #e63946; /* Rojo para mensajes de error */
   text-align: center;
   margin-bottom: 15px;
+  font-size: 14px;
 }
 
 /* Estilo del formulario */
 form {
-  background-color: var(--primary-color);
-  color: var(--text-light);
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px;
 }
 
 /* Grupos del formulario */
@@ -41,18 +39,25 @@ form {
 }
 
 label {
-  font-size: 16px;
-  color: var(--text-light);
+  font-size: 14px;
+  color: #333333;
+  font-weight: bold;
 }
 
 .form-control {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
-  box-sizing: border-box; /* Para evitar desbordes */
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 0 5px rgba(30, 58, 138, 0.2);
+  outline: none;
 }
 
 /* Contenedor de contraseña */
@@ -62,97 +67,79 @@ label {
 
 .password-toggle {
   position: absolute;
-  right: 12px; /* Ajusta la distancia desde el borde derecho */
+  right: 10px;
   top: 50%;
-  transform: translateY(-130%); /* Centra perfectamente el ícono verticalmente */
+  transform: translateY(-50%);
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--text-light);
-  font-size: 20px; /* Ajusta el tamaño del ícono */
-  display: flex;
-  align-items: center; /* Centra el ícono dentro del botón */
-  justify-content: center;
+  color: #1e3a8a;
+  font-size: 20px;
 }
 
-/* Botones */
-.btn {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-/* Estilo del botón "Ingresar" */
-.btn-primary {
-  background-color: var(--secondary-color);
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.btn-primary:hover {
-  background-color: var(--highlight-color);
-  color: #ffffff;
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilo del botón "Crear Cuenta" */
-.btn-create-account {
-  width: 100%;
-  padding: 12px;
-  background-color: #28a745;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-create-account:hover {
-  background-color: #0d6922;
-  color: #ffffff;;
-  transform: scale(1.05); /* Efecto de aumento */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Checkbox y enlaces */
+/* Contenedor de "Recordarme" */
 .form-group-checkbox {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-group-checkbox input {
+  margin-right: 5px; /* Espaciado entre el checkbox y el label */
 }
 
 label {
   margin: 0;
   font-size: 14px;
+  color: #333;
 }
 
-a {
-  color: var(--highlight-color);
-  text-decoration: none;
+/* Botones generales */
+.btn {
+  width: 100%; /* Ambos botones ocuparán el mismo ancho */
+  padding: 12px; /* Mismo padding para ambos */
+  font-size: 16px; /* Mismo tamaño de fuente */
+  font-weight: bold; /* Misma fuente */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados iguales */
+  cursor: pointer; /* Cursor tipo botón */
+  transition: all 0.3s ease; /* Animación suave */
 }
 
-a:hover {
-  text-decoration: underline;
+/* Botón "Ingresar" */
+.btn-primary {
+  background-color: #1e3a8a; /* Azul */
 }
 
+.btn-primary:hover {
+  background-color: #3b82f6;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón "Crear Cuenta" */
+.btn-green {
+  background-color: #28a745; /* Verde */
+}
+
+.btn-green:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Mensaje de registro */
 .register-message {
   margin-top: 20px;
-  font-size: 16px;
-  color: var(--text-light);
+  font-size: 14px;
+  color: #333333;
   text-align: center;
 }
 
 .link-highlight {
-  color: var(--highlight-color);
+  color: #28a745;
   font-weight: bold;
   text-decoration: none;
 }
@@ -161,9 +148,30 @@ a:hover {
   text-decoration: underline;
 }
 
-.divider {
+/* Encabezado con el botón de "Ir Atrás" */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+}
+
+/* Botón de "Ir Atrás" */
+.back-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none;
   border: none;
-  border-top: 1px solid var(--text-light); /* Línea sutil */
-  margin: 20px 0; /* Espaciado vertical */
-  opacity: 0.6; /* Hace la línea más tenue */
+  cursor: pointer;
+  color: #1e3a8a;
+  margin: 10px;
+  font-size: 20px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.back-button:hover {
+  color: #3b82f6;
+  transform: scale(1.1);
 }

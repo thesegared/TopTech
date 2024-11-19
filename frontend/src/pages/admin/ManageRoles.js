@@ -3,15 +3,18 @@ import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import api from "../../api";
 import "./ManageRoles.css";
+import { MdArrowBack } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function ManageRoles() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Instanciar navigate
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get("/users/all"); // Llama a la ruta del backend
+        const response = await api.get("/users/all");
         setUsers(response.data);
         setLoading(false);
       } catch (error) {
@@ -24,7 +27,7 @@ function ManageRoles() {
 
   const handleRoleChange = async (userId, newRole) => {
     try {
-      await api.put("/users/update-role", { userId, newRole }); // Llama al endpoint para actualizar rol
+      await api.put("/users/update-role", { userId, newRole });
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === userId ? { ...user, role: newRole } : user
@@ -36,13 +39,13 @@ function ManageRoles() {
   };
 
   const handleEdit = (userId) => {
-    console.log(`Edit user ${userId}`); // Aquí puedes implementar la lógica de edición
+    console.log(`Edit user ${userId}`);
   };
 
   const handleDelete = async (userId) => {
     if (window.confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
       try {
-        await api.delete(`/users/${userId}`); // Endpoint para eliminar usuario
+        await api.delete(`/users/${userId}`);
         setUsers(users.filter((user) => user._id !== userId));
       } catch (error) {
         console.error("Error al eliminar usuario:", error);
@@ -54,7 +57,13 @@ function ManageRoles() {
 
   return (
     <div className="manage-roles-container">
-      <h2>Gestión de Roles</h2>
+      {/* Botón de "Atrás" */}
+      <div className="header">
+        <button onClick={() => navigate(-1)} className="back-button">
+          <MdArrowBack size={24} />
+        </button>
+        <h2>Gestión de Roles</h2>
+      </div>
       <table className="roles-table">
         <thead>
           <tr>

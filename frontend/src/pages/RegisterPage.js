@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import api from '../api';
 import './RegisterPage.css';
+import { MdArrowBack } from 'react-icons/md';
 
 function RegisterPage() {
   const navigate = useNavigate(); // Inicializamos useNavigate
@@ -53,11 +54,11 @@ function RegisterPage() {
         confirmPassword, // enviar confirmación de contraseña al backend
       });
       setMessage('Usuario registrado exitosamente');
-      
+
       // Guardamos el token y userId en localStorage y logueamos al usuario automáticamente
       localStorage.setItem('token', response.data.token); // Guardar el token de sesión
       localStorage.setItem('userId', email); // Usar el email como userId
-      
+
       navigate('/'); // Redirigir al usuario a la página principal o al dashboard
 
     } catch (error) {
@@ -69,12 +70,19 @@ function RegisterPage() {
 
   return (
     <div className="register-container">
-      <h2>Registrarse</h2>
+      <div className="header">
+        <button onClick={() => navigate('/login')} className="back-button">
+          <MdArrowBack size={24} />
+        </button>
+        <h2>Crear Cuenta</h2>
+      </div>
       {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
+        {/* Nombre */}
         <div className="form-group">
-          <label>Nombre</label>
+          <label htmlFor="name">Nombre</label>
           <input
+            id="name"
             type="text"
             className="form-control"
             value={name}
@@ -82,9 +90,12 @@ function RegisterPage() {
             required
           />
         </div>
+
+        {/* Email */}
         <div className="form-group">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="email"
             className="form-control"
             value={email}
@@ -92,9 +103,12 @@ function RegisterPage() {
             required
           />
         </div>
+
+        {/* Contraseña */}
         <div className="form-group">
-          <label>Contraseña</label>
+          <label htmlFor="password">Contraseña</label>
           <input
+            id="password"
             type="password"
             className="form-control"
             value={password}
@@ -102,9 +116,12 @@ function RegisterPage() {
             required
           />
         </div>
+
+        {/* Confirmar Contraseña */}
         <div className="form-group">
-          <label>Confirmar Contraseña</label>
+          <label htmlFor="confirm-password">Confirmar Contraseña</label>
           <input
+            id="confirm-password"
             type="password"
             className="form-control"
             value={confirmPassword}
@@ -112,11 +129,14 @@ function RegisterPage() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary" disabled={isLoading}>
+
+        {/* Botón de registro */}
+        <button type="submit" className="btn" disabled={isLoading}>
           {isLoading ? 'Registrando...' : 'Registrarse'}
         </button>
       </form>
     </div>
+
   );
 }
 

@@ -17,7 +17,7 @@ body {
   color: var(--text-dark);
 }
 
-/* Botones */
+ /* Botones 
 button {
   background-color: var(--primary-color);
   color: var(--text-light);
@@ -30,7 +30,7 @@ button {
 
 button:hover {
   background-color: var(--highlight-color);
-}
+} */
 
 /* Enlaces */
 a {

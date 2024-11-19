@@ -12,8 +12,9 @@
 ## Características
 - **Catálogo de Productos**: Visualización, búsqueda y filtrado de productos.
 - **Gestión de Carrito de Compras**: Añadir y eliminar productos, cálculo de totales.
-- **Procesamiento de Pagos**: Integración con plataformas de pago como Nequi y PSE.
-- **Autenticación de Usuarios**: Registro, inicio de sesión y restablecimiento de contraseña.
+- **Gestión de Usuario**: Asignar roles, editar y eliminar usuarios.
+- **Procesamiento de Pagos**: *Pendiente*
+- **Autenticación de Usuarios**: Registro e inicio de sesión.
 
 ## Arquitectura del Proyecto
 **TopTech** sigue una arquitectura de tres capas:

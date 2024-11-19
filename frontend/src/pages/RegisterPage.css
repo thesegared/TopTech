@@ -1,21 +1,111 @@
+/* Contenedor principal */
 .register-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1; /* Hace que ocupe todo el espacio disponible */
-  padding: 20px;
-  background-color: #f9f9f9;
-  }
-  
-  .register-container h2 {
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  button {
-    margin-top: 20px;
-  }
+  max-width: 500px; /* Ajusta el ancho máximo */
+  margin: 50px auto; /* Centra el contenedor */
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.register-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+/* Mensajes */
+.register-container p {
+  margin-bottom: 15px;
+  color: #e74c3c; /* Mensaje de error en rojo */
+  text-align: center;
+}
+
+/* Grupos del formulario */
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 0 5px rgba(30, 58, 138, 0.2);
+  outline: none;
+}
+
+/* Botón de registro */
+.btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #1e3a8a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.btn:disabled {
+  background-color: #aaa; /* Botón desactivado */
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Encabezado con el botón de "Ir Atrás" */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Asegura que el contenido esté alineado a la izquierda */
+  position: relative; /* Posición relativa para poder ajustar la posición del botón */
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+}
+
+/* Botón de "Ir Atrás" en la esquina izquierda */
+.back-button {
+  position: absolute; /* Posición absoluta dentro del header */
+  top: 0; /* Alínea al borde superior */
+  left: 0; /* Lo posiciona en la esquina izquierda */
+  background: none; /* Sin fondo */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cursor de puntero */
+  color: #1e3a8a; /* Color del texto */
+  margin: 10px; /* Añade margen alrededor del botón */
+  font-size: 20px; /* Tamaño del icono */
+  transition: transform 0.3s ease, color 0.3s ease; /* Efecto de transición */
+}
+
+/* Efecto al pasar el mouse */
+.back-button:hover {
+  color: #3b82f6; /* Cambia el color al pasar el mouse */
+  transform: scale(1.1); /* Hace que el botón aumente de tamaño ligeramente */
+}
