@@ -30,6 +30,8 @@ const sortOptions = [
   { value: "priceDesc", label: "Mayor a Menor precio" },
 ];
 
+
+
 function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,24 +47,29 @@ function ProductList() {
         const response = await api.get("/products", {
           params: { search: searchTerm, category: categoryFilter, sort: sortFilter },
         });
-        setProducts(response.data);
+        setProducts(response.data); // El backend devuelve solo los productos activos
         setLoading(false);
       } catch (error) {
         console.error("Error al obtener productos:", error);
         setLoading(false);
       }
     };
-
+  
     fetchProducts();
-  }, [searchTerm, categoryFilter, sortFilter]);
+  }, [searchTerm, categoryFilter, sortFilter]);  
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
   const handleCategoryChange = (e) => setCategoryFilter(e.target.value);
   const handleSortChange = (e) => setSortFilter(e.target.value);
 
-  const addToCart = async (productId) => {
+  const addToCart = async (productId, availableQuantity) => {
     const userId = localStorage.getItem("userId") || "guest";
-
+  
+    if (availableQuantity <= 0) {
+      alert("No hay suficiente stock disponible.");
+      return;
+    }
+  
     try {
       await api.post("/cart/add", { userId, productId });
       await fetchCart();
@@ -79,6 +86,11 @@ function ProductList() {
     }));
   };
 
+  const filteredProducts = products.filter(
+    (product) => product.active && product.quantity > 0
+  );
+
+  
   if (loading) return <p>Cargando productos...</p>;
 
   return (

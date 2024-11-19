@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaSearch } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import "./AdminProductManagement.css";
 
@@ -22,7 +22,9 @@ function AdminProductManagement() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await api.get("/products");
+        const response = await api.get("/products", {
+          params: { includeInactive: true }, // Solicitar todos los productos
+        });
         setProducts(response.data);
       } catch (error) {
         console.error("Error al obtener productos:", error);
@@ -51,14 +53,12 @@ function AdminProductManagement() {
 
   const handleUpdateQuantity = async (productId, newQuantity) => {
     try {
-      if (newQuantity >= 0) {
-        await api.put(`/products/${productId}/update-quantity`, { quantity: newQuantity });
-        setProducts((prevProducts) =>
-          prevProducts.map((product) =>
-            product._id === productId ? { ...product, quantity: newQuantity } : product
-          )
-        );
-      }
+      await api.put(`/products/${productId}/update-quantity`, { quantity: newQuantity });
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product._id === productId ? { ...product, quantity: Math.max(newQuantity, 0) } : product
+        )
+      );
     } catch (error) {
       console.error("Error al actualizar la cantidad:", error);
     }
@@ -73,7 +73,7 @@ function AdminProductManagement() {
         )
       );
     } catch (error) {
-      console.error("Error al actualizar el estado activo:", error);
+      console.error("Error al alternar el estado activo:", error);
     }
   };
 
@@ -92,32 +92,37 @@ function AdminProductManagement() {
 
   return (
     <div className="container">
-      <h2>Panel de Administración </h2>
-      <div className="filters-container">
-        <div className="admin-buttons">
-          <button
-            onClick={() => navigate("/add-product")}
-            className="btn btn-primary admin-btn"
-          >
-            Agregar Producto
-          </button>
-          <button
-            onClick={() => navigate("/admin/manage-roles")}
-            className="btn btn-secondary admin-btn"
-          >
-            Gestionar Usuarios
-          </button>
+      <h2>Panel de Administración</h2>
 
-          
-        </div>
+      {/* Botones de agregar productos y gestionar usuarios */}
+      <div className="admin-buttons">
+        <button
+          onClick={() => navigate("/add-product")}
+          className="btn btn-primary admin-btn"
+        >
+          Agregar Producto
+        </button>
+        <button
+          onClick={() => navigate("/admin/manage-roles")}
+          className="btn btn-secondary admin-btn"
+        >
+          Gestionar Usuarios
+        </button>
+      </div>
+
+      <div className="filters-container">
         <div className="search-and-filters">
-          <input
-            type="text"
-            className="form-control search-bar"
-            placeholder="Buscar producto..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+          {/* Recuadro de búsqueda mejorado */}
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Buscar producto..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <FaSearch className="search-icon" />
+          </div>
+          {/* Filtros de categoría y precio mejorados */}
           <div className="filter-group">
             <select
               className="form-control"
@@ -173,20 +178,20 @@ function AdminProductManagement() {
                   {new Intl.NumberFormat("es-CO", {
                     style: "currency",
                     currency: "COP",
+                    maximumFractionDigits: 0, // Esto elimina los decimales
                   }).format(product.price)}
                 </td>
                 <td>
+                  {/* Mejorar los controles de cantidad */}
                   <div className="quantity-controls">
                     <button
                       onClick={() => handleUpdateQuantity(product._id, product.quantity - 1)}
-                      className="quantity-btn"
                     >
                       -
                     </button>
                     <span>{product.quantity}</span>
                     <button
                       onClick={() => handleUpdateQuantity(product._id, product.quantity + 1)}
-                      className="quantity-btn"
                     >
                       +
                     </button>

@@ -27,7 +27,7 @@ button.btn-primary {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button.admin-btn.btn-secondary{
+button.admin-btn.btn-secondary {
   font-size: 16px;
   font-weight: bold;
   background-color: #1e3a8a;
@@ -148,7 +148,6 @@ button.btn-primary:hover {
   opacity: 1;
 }
 
-
 /* Toggle Switch */
 .toggle-switch {
   width: 34px;
@@ -216,3 +215,98 @@ button.btn-primary:hover {
   transform: scale(1.05);
 }
 
+/* Contenedor de la barra de búsqueda y los filtros */
+.search-and-filters {
+  display: flex;
+  align-items: center; /* Centra los elementos verticalmente */
+  gap: 15px; /* Espaciado entre los elementos */
+  justify-content: space-between; /* Alinea los elementos entre los extremos */
+  flex-wrap: wrap; /* Permite que los elementos se ajusten si no hay espacio */
+  margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Ajustar la barra de búsqueda */
+.search-bar {
+  position: relative;
+  flex-grow: 2; /* Permite que la barra de búsqueda ocupe el espacio disponible */
+  max-width: 800px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 0 8px rgba(30, 58, 138, 0.5);
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #1e3a8a;
+}
+
+/* Ajustar los filtros */
+.filter-group {
+  display: flex;
+  gap: 15px; /* Espaciado entre los selectores */
+}
+
+.filter-group select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.filter-group select:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 0 8px rgba(30, 58, 138, 0.5);
+}
+
+
+
+/* Mejorar la sección de cantidad */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  width: 35px;
+  height: 35px;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quantity-controls button:hover {
+  background-color: #3b82f6;
+}
+
+.quantity-controls span {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}

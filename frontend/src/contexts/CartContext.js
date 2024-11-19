@@ -33,18 +33,23 @@ export const CartProvider = ({ children }) => {
   }, [fetchCart]);
 
   // Actualizar cantidad de un producto
-  const updateQuantity = async (cartItemId, newQuantity) => {
+  const updateQuantity = async (cartItemId, newQuantity, availableQuantity) => {
     try {
+      if (newQuantity > availableQuantity) {
+        alert("No puedes agregar más productos de los disponibles.");
+        return;
+      }
       if (newQuantity <= 0) {
         await removeFromCart(cartItemId);
       } else {
         await api.put(`/cart/update/${cartItemId}`, { quantity: newQuantity, userId });
-        fetchCart(); // Sincroniza el estado después de actualizar la cantidad
+        fetchCart();
       }
     } catch (error) {
       console.error("Error al actualizar la cantidad:", error);
     }
   };
+
 
   // Eliminar un producto del carrito
   const removeFromCart = async (cartItemId) => {

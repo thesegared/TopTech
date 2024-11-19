@@ -12,12 +12,15 @@ function Header() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const isAuthenticated = !!token;
+  const role = localStorage.getItem("role"); // Obtener el rol del usuario
+  const isAdmin = role === "admin"; // Verificar si el usuario es admin
 
   const { cartItemCount, totalPrice } = useCart(); // Obtener datos centralizados del contexto
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("role"); // Opcional: Eliminar el rol del localStorage
     navigate("/login");
   };
 
@@ -56,8 +59,8 @@ function Header() {
             </div>
           </Link>
 
-          {isAuthenticated && (
-            <Link to="/admin/manage-products" title="Gestionar Productos">
+          {isAuthenticated && isAdmin && ( // Mostrar solo para admin
+            <Link to="/admin/manage-products" title="Panel de adminsitración">
               <IoAppsSharp className="nav-icon" />
             </Link>
           )}

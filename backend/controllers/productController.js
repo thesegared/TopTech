@@ -72,34 +72,35 @@ const createProduct = async (req, res) => {
 // Obtener todos los productos
 const getProducts = async (req, res) => {
   try {
-    const { search, category, sort } = req.query; // Añadimos 'sort' a los parámetros de consulta
+    const { search, category, sort, includeInactive } = req.query;
 
-    const filter = {};
+    // Filtrar productos según el estado activo/inactivo
+    const filter = includeInactive === "true" ? {} : { active: true };
 
     if (category) {
       filter.category = category; // Filtrar por categoría
     }
 
     if (search) {
-      filter.name = { $regex: search, $options: 'i' }; // Filtrar por búsqueda de nombre de producto
+      filter.name = { $regex: search, $options: "i" }; // Filtrar por nombre
     }
 
-    let sortOption = {}; // Inicializamos un objeto vacío para el ordenamiento
-    if (sort === 'newest') {
-      sortOption = { createdAt: -1 }; // Más recientes primero
-    } else if (sort === 'oldest') {
-      sortOption = { createdAt: 1 }; // Más antiguos primero
-    } else if (sort === 'priceAsc') {
-      sortOption = { price: 1 }; // Precio de menor a mayor
-    } else if (sort === 'priceDesc') {
-      sortOption = { price: -1 }; // Precio de mayor a menor
+    let sortOption = {};
+    if (sort === "newest") {
+      sortOption = { createdAt: -1 };
+    } else if (sort === "oldest") {
+      sortOption = { createdAt: 1 };
+    } else if (sort === "priceAsc") {
+      sortOption = { price: 1 };
+    } else if (sort === "priceDesc") {
+      sortOption = { price: -1 };
     }
 
-    const products = await Product.find(filter).sort(sortOption); // Añadimos el ordenamiento
+    const products = await Product.find(filter).sort(sortOption);
     res.status(200).json(products);
   } catch (error) {
-    console.error('Error al obtener los productos:', error);
-    res.status(500).json({ message: 'Error al obtener los productos', error });
+    console.error("Error al obtener los productos:", error);
+    res.status(500).json({ message: "Error al obtener los productos", error });
   }
 };
 
@@ -174,6 +175,48 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// Actualizar cantidad de producto
+const updateProductQuantity = async (req, res) => {
+  try {
+    const { quantity } = req.body;
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
+
+    // Actualizar cantidad
+    product.quantity = Math.max(quantity, 0); // Asegura que no sea menor a 0
+    if (product.quantity === 0) {
+      product.active = false; // Desactiva el producto si la cantidad es 0
+    }
+    await product.save();
+    res.json(product);
+  } catch (error) {
+    console.error("Error al actualizar la cantidad del producto:", error);
+    res.status(500).json({ message: "Error al actualizar la cantidad" });
+  }
+};
+
+// Alternar estado activo
+const toggleProductActive = async (req, res) => {
+  try {
+    const { active } = req.body;
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      { active },
+      { new: true }
+    );
+    if (!product) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
+    res.json(product);
+  } catch (error) {
+    console.error("Error al alternar el estado del producto:", error);
+    res.status(500).json({ message: "Error al alternar el estado" });
+  }
+};
+
 module.exports = {
   createProduct,
   getProducts,
@@ -181,5 +224,7 @@ module.exports = {
   getProductById,
   updateProduct,
   deleteProduct,
+  updateProductQuantity,
+  toggleProductActive,
   upload
 };

@@ -21,4 +21,10 @@ router.put('/:id', upload.single('image'), productController.updateProduct);
 // Ruta para eliminar un producto
 router.delete('/:id', productController.deleteProduct);
 
+// Ruta para actualizar cantidad de producto
+router.put('/:id/update-quantity', productController.updateProductQuantity);
+
+// Ruta para alternar el estado activo del producto
+router.put('/:id/toggle-active', productController.toggleProductActive);
+
 module.exports = router;

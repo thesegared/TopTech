@@ -7,6 +7,8 @@ const productSchema = new mongoose.Schema(
     price: { type: Number, required: true, min: 0 },
     category: { type: String, required: true },
     image: { type: String, required: true },
+    quantity: { type: Number, required: true, min: 0, default: 0 },
+    active: { type: Boolean, default: true },
   },
   { timestamps: true } // Esto agrega automáticamente createdAt y updatedAt
 );
