@@ -34,7 +34,7 @@
 
 .hamburger-icon {
   font-size: 24px;
-  color: #007bff;
+  color: #1e3a8a;
   transition: transform 0.3s;
 }
 
@@ -60,7 +60,7 @@
 /* Estilo uniforme para todos los íconos */
 .nav-icons-container .nav-icon {
   font-size: 30px; /* Tamaño uniforme */
-  color: #007bff; /* Azul predeterminado */
+  color: #1e3a8a; 
   transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   display: flex;
@@ -175,7 +175,7 @@
 
 .cart-total {
   font-size: 14px;
-  color: #007bff;
+  color: #1e3a8a;
 }
 
 .cart-count {

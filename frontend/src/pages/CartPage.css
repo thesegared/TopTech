@@ -128,7 +128,7 @@
 .cart-item-price {
     text-align: center;
     font-size: 18px;
-    color: #007bff;
+    color: #1e3a8a;
     font-weight: bold;
 }
 
@@ -232,7 +232,7 @@
 }
 
 .cart-summary .btn-primary {
-    background-color: #007bff;
+    background-color: #1e3a8a
 }
 
 .cart-summary .btn-primary:hover {

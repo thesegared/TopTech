@@ -1,7 +1,6 @@
-// controllers/userController.js
 const User = require('../models/User');
-const bcrypt = require('bcryptjs'); // Importación de bcrypt 
-const jwt = require('jsonwebtoken'); // Importación de jsonwebtoken
+const bcrypt = require('bcryptjs'); 
+const jwt = require('jsonwebtoken');
 
 // Registro de usuario
 exports.registerUser = async (req, res) => {
@@ -83,5 +82,65 @@ exports.loginUser = async (req, res) => {
     res.json({ message: 'Inicio de sesión exitoso', token, role: user.role });
   } catch (error) {
     res.status(500).json({ message: 'Error en el servidor', error });
+  }
+};
+
+// Obtener todos los usuarios
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "name email role"); // Selecciona solo los campos necesarios
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener los usuarios", error });
+  }
+};
+
+// Actualizar el rol de un usuario
+exports.updateUserRole = async (req, res) => {
+  try {
+    const { userId, newRole } = req.body;
+
+    // Validar entrada
+    if (!userId || !newRole) {
+      return res.status(400).json({ message: 'Faltan datos para actualizar el rol' });
+    }
+
+    // Verificar si el nuevo rol es válido
+    if (!['user', 'admin'].includes(newRole)) {
+      return res.status(400).json({ message: 'El rol especificado no es válido' });
+    }
+
+    // Buscar y actualizar el usuario
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { role: newRole },
+      { new: true } // Retorna el usuario actualizado
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    res.status(200).json({ message: 'Rol actualizado exitosamente', user });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al actualizar el rol', error });
+  }
+};
+
+// Controlador para eliminar un usuario
+exports.deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Buscar y eliminar el usuario
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    res.status(200).json({ message: 'Usuario eliminado exitosamente' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al eliminar el usuario', error });
   }
 };

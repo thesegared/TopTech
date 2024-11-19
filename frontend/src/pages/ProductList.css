@@ -17,7 +17,7 @@
 /* Estilo del icono de hamburguesa */
 .hamburger-icon {
     font-size: 20px; /* Tamaño del icono */
-    color: #007bff; /* Color del icono */
+    color: #1e3a8a; /* Color del icono */
 }
 
 /* Estilo para el select dentro de la categoría */
@@ -49,13 +49,13 @@
 }
 
 .search-input input:focus {
-    border-color: #007bff;
+    border-color: #1e3a8a;
     outline: none;
 }
 
 /* Estilo para el botón de búsqueda */
 .search-btn {
-    background-color: #007bff;
+    background-color: #1e3a8a;
     border: none;
     padding: 10px;
     cursor: pointer;

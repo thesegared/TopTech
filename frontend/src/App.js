@@ -12,7 +12,7 @@ import AdminProductManagement from './pages/admin/AdminProductManagement';
 import AddProductPage from './pages/admin/AddProductPage';
 import EditProductPage from './pages/admin/EditProductPage';
 import './App.css';
-
+import ManageRoles from './pages/admin/ManageRoles';
 
 function App() {
   return (
@@ -26,8 +26,10 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/admin/manage-products" element={<AdminProductManagement />} />
+            <Route path="/admin/manage-roles" element={<ManageRoles />} />
             <Route path="/add-product" element={<AddProductPage />} />
             <Route path="/admin/edit-product/:id" element={<EditProductPage />} />
+            
           </Routes>
         </main>
         <Footer />

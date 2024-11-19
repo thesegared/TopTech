@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md';
 import api from '../../api';
+import './EditProductPage.css';
+
 
 function EditProductPage() {
   const { id } = useParams();
@@ -52,21 +55,6 @@ function EditProductPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Verificar si todos los campos están correctamente definidos
-    console.log("Formulario enviado con los siguientes datos:", {
-      name,
-      description,
-      price,
-      category,
-      image,
-    });
-
-    // Verifica si los datos requeridos están presentes
-    if (!name || !description || !price || !category) {
-      setMessage('Por favor complete todos los campos requeridos');
-      return;
-    }
-
     // Crear FormData solo con los campos que deseas actualizar
     const formData = new FormData();
     formData.append('name', name);
@@ -79,36 +67,32 @@ function EditProductPage() {
       formData.append('image', image);
     }
 
-    // Verifica qué se está enviando
-    for (let pair of formData.entries()) {
-      console.log(pair[0]+ ': ' + pair[1]);
-    }
-
     try {
       const token = localStorage.getItem('token');
-      console.log('Token de autorización:', token);
-
-      // Realiza la solicitud PUT
-      const response = await api.put(`/products/${id}`, formData, {
+      await api.put(`/products/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      console.log('Respuesta de la API:', response);
       setMessage('Producto actualizado exitosamente');
       navigate('/admin/manage-products');
     } catch (error) {
       setMessage('Error al actualizar el producto');
       console.error('Error al actualizar el producto:', error);
     }
-};
+  };
 
   return (
-    <div className="container">
-      <h2>Editar Producto</h2>
-      {message && <p>{message}</p>}
+    <div className="edit-product-container">
+      <div className="header">
+        <button onClick={() => navigate(-1)} className="back-button">
+          <MdArrowBack size={24} />
+        </button>
+        <h2>Editar Producto</h2>
+      </div>
+      {message && <p className={message.includes('exitosamente') ? 'success' : 'error'}>{message}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nombre del Producto</label>
@@ -165,7 +149,9 @@ function EditProductPage() {
             </div>
           )}
         </div>
-        <button type="submit" className="btn btn-primary">Guardar Cambios</button>
+        <div className="form-actions">
+          <button type="submit" className="btn btn-primary">Guardar Cambios</button>
+        </div>
       </form>
     </div>
   );

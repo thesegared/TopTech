@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MdArrowBack } from 'react-icons/md'; // Importar el icono de flecha
 import api from '../../api';
-import { useNavigate } from 'react-router-dom'; // Necesitamos usar useNavigate para redirigir
+import './AddProductPage.css';
 
 const categories = [
   "Accesorios de Tecnología",
@@ -24,35 +26,43 @@ function AddProductPage() {
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState(categories[0]);
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Para redirigir al usuario a otra página
+  const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Validaciones en el frontend
+
     if (!name.trim()) {
       setMessage('El nombre del producto es obligatorio.');
       return;
     }
-  
+
     if (!price || price <= 0) {
       setMessage('El precio debe ser mayor a 0.');
       return;
     }
-  
+
     if (!category) {
       setMessage('La categoría es obligatoria.');
       return;
     }
-  
-    if (!image) { 
+
+    if (!image) {
       setMessage('La imagen es obligatoria.');
       return;
     }
 
     const finalDescription = description.trim() || '';
-  
+
     try {
       const token = localStorage.getItem('token');
       const formData = new FormData();
@@ -60,34 +70,39 @@ function AddProductPage() {
       formData.append('description', finalDescription);
       formData.append('price', price);
       formData.append('category', category);
-      formData.append('image', image); // La imagen se envía como un archivo
-  
+      formData.append('image', image);
+
       await api.post('/products', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
-      
+
       setMessage('Producto creado exitosamente');
       setName('');
       setDescription('');
       setPrice('');
       setCategory(categories[0]);
       setImage(null);
+      setPreview(null);
 
-      // Redirigir a la página de gestión de productos
-      navigate('/admin/manage-products'); // Esto redirige a la página de gestión
+      navigate('/admin/manage-products');
     } catch (error) {
       setMessage('Error al crear el producto');
       console.error(error);
     }
-  };  
+  };
 
   return (
-    <div className="container">
-      <h2>Agregar Producto</h2>
-      {message && <p>{message}</p>}
+    <div className="add-product-container">
+      <div className="header">
+        <button onClick={() => navigate(-1)} className="back-button">
+          <MdArrowBack size={24} />
+        </button>
+        <h2>Agregar Producto</h2>
+      </div>
+      {message && <p className={message.includes('exitosamente') ? 'success' : 'error'}>{message}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nombre del Producto</label>
@@ -96,7 +111,6 @@ function AddProductPage() {
             className="form-control"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required
           />
         </div>
         <div className="form-group">
@@ -114,7 +128,6 @@ function AddProductPage() {
             className="form-control"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            required
           />
         </div>
         <div className="form-group">
@@ -123,7 +136,6 @@ function AddProductPage() {
             className="form-control"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            required
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
@@ -135,12 +147,15 @@ function AddProductPage() {
           <input
             type="file"
             className="form-control"
-            onChange={(e) => setImage(e.target.files[0])}
-            required
+            onChange={handleImageChange}
           />
+          {preview && <img src={preview} alt="Vista Preliminar" className="image-preview" />}
         </div>
-        <button type="submit" className="btn btn-primary">Agregar Producto</button>
+        <div className="form-actions">
+          <button type="submit" className="btn btn-primary">Agregar Producto</button>
+        </div>
       </form>
+      
     </div>
   );
 }
