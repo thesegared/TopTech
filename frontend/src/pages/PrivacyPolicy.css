@@ -1,0 +1,40 @@
+.privacy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para el título principal */
+  .privacy-container h1 {
+    color: #1e3a8a; /* Azul oscuro */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Cambiar color de los subtítulos h2 */
+  .privacy-container h2 {
+    color: #000; /* Negro */
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  /* Estilo general de los párrafos */
+  .privacy-container p {
+    font-size: 16px;
+    color: #555; /* Gris oscuro */
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+  
+  /* Línea divisoria */
+  .privacy-container hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+    opacity: 0.5;
+  }
+  

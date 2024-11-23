@@ -1,41 +1,76 @@
 /* Contenedor principal del Footer */
 .footer {
-    background-color: var(--secondary-color); /* Color secundario */
-    color: var(--text-light); /* Texto claro */
-    padding: 20px;
-    text-align: center;
-    font-size: 14px;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    position: relative;
-    z-index: 1000;
-  }
-  
-  /* Línea divisoria */
-  .footer hr {
-    border: 0;
-    height: 1px;
-    background: var(--text-light); /* Texto claro */
-    margin: 10px 0;
-    opacity: 0.5;
-  }
-  
-  /* Texto */
-  .footer p {
-    margin: 0;
-    color: var(--text-light); /* Texto claro */
-    font-size: 14px;
-  }
-  
-  /* Efecto hover para enlaces */
-  .footer a {
-    color: var(--highlight-color); /* Color de resaltado */
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .footer a:hover {
-    color: var(--text-light); /* Cambia a claro en hover */
-    text-decoration: underline;
-  }
-  
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+  padding: 10px 0; /* Menos espacio interno */
+  font-size: 14px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Centrar párrafos y enlaces con menos espacio */
+.footer p,
+.footer a {
+  margin: 2px 0; /* Reduce el espacio vertical */
+  text-align: center;
+}
+
+/* Línea divisoria */
+.footer hr {
+  border: none;
+  height: 1px;
+  background: var(--text-light);
+  opacity: 0.5;
+  margin: 8px 0; /* Menos espacio entre las divisiones */
+}
+
+/* Navegación rápida */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Reduce espacio entre enlaces */
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links a {
+  color: var(--highlight-color);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.footer-links a:hover {
+  color: var(--text-light);
+  text-decoration: underline;
+}
+
+/* Redes sociales */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Reduce espacio entre íconos */
+  font-size: 20px;
+  margin: 0;
+}
+
+.footer-social a {
+  color: var(--text-light);
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-social a:hover {
+  color: var(--highlight-color);
+}
+
+/* Sobreescribir conflictos */
+.footer.text-lg-start {
+  text-align: center !important;
+}
+
+.footer-centered {
+  text-align: center !important;
+}
+
+.text-lg-start:not(.footer) {
+  text-align: left !important;
+}

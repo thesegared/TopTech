@@ -1,0 +1,43 @@
+.terms-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título principal */
+  .terms-container h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e3a8a; /* Azul oscuro */
+    margin-bottom: 20px;
+  }
+  
+  /* Subtítulos (h2) */
+  .terms-container h2 {
+    color: #000; /* Negro */
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  /* Párrafos generales */
+  .terms-container p {
+    font-size: 16px;
+    color: #555; /* Gris oscuro */
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+  
+  /* Línea divisoria */
+  .terms-container hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+    opacity: 0.5;
+  }
+  

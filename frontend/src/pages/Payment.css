@@ -1,0 +1,40 @@
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  .payment-animation {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .payment-container h1 {
+    font-size: 2rem;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+  }
+  
+  .payment-container p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .home-link {
+    color: var(--highlight-color); /* Cambia al color que prefieras */
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .home-link:hover {
+    color: var(--text-light); /* Cambia el color al pasar el cursor */
+  }
+  

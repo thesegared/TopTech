@@ -23,6 +23,16 @@ const CartPage = () => {
     navigate("/");
   };
 
+  const handlePayNow = () => {
+    const token = localStorage.getItem("token"); // Verificar si el usuario está autenticado
+    if (!token) {
+      alert("Debes registrarte o iniciar sesión para proceder con el pago.");
+      navigate("/login"); // Redirige al login si no está autenticado
+    } else {
+      navigate("/shipping-details"); // Redirige a la página de detalles de envío
+    }
+  };
+
   if (!cartItems || cartItems.length === 0) {
     return (
       <div className="container">
@@ -74,11 +84,15 @@ const CartPage = () => {
                   </p>
                 </div>
                 <div className="cart-item-quantity">
-                  <button onClick={() => updateQuantity(item._id, item.quantity - 1)}>
+                  <button
+                    onClick={() => updateQuantity(item._id, item.quantity - 1)}
+                  >
                     -
                   </button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item._id, item.quantity + 1)}>
+                  <button
+                    onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                  >
                     +
                   </button>
                 </div>
@@ -106,7 +120,9 @@ const CartPage = () => {
               }).format(totalPrice)}
             </h3>
             <hr className="my-4" />
-            <button className="btn btn-primary">PAGAR AHORA</button>
+            <button className="btn btn-primary" onClick={handlePayNow}>
+              PAGAR AHORA
+            </button>
             <button className="btn btn-secondary" onClick={handleContinueShopping}>
               CONTINUAR COMPRANDO
             </button>
