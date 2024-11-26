@@ -15,10 +15,8 @@
 
 ### Página Principal
 ![Página Principal](frontend/src/assets/home_page.png)
-
 ### Carrito de Compras
 ![Carrito de Compras](frontend/src/assets/carrito_compras.png)
-
 ### Panel de Administración
 ![Panel de Administración](frontend/src/assets/panel_administracion.png)
 
